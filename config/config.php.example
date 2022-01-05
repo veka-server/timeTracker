@@ -1,0 +1,30 @@
+<?php
+/**
+ * A utiliser avec la classe de config de veka-server/config
+ */
+
+$app_name = 'Timeker';
+$root_dir = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR;
+
+return array(
+
+    "APP_NAME"   => $app_name,
+    "VERSION"   => \App\classe\Git::getVersion(), /** @todo ajouter un cache / performance */
+
+    // Environnement
+    "ENV"   => 'DEV', // DEV / PROD
+
+    // ARBORESCENCE
+    "ROOT_DIR"   => realpath($root_dir),
+    "PUBLIC_DIR"   => realpath($root_dir.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR),
+
+    // BDD
+    "db_user" => '',
+    "db_pass" => '',
+    "db_host" => '',
+    "db_name" => '',
+
+    // Discord
+    "DISCORD_CHANNEL" => 'https://discordapp.com/api/webhooks/...',
+    "DISCORD_APP_NAME" => strtoupper($app_name)
+);
