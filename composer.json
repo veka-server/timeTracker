@@ -12,7 +12,8 @@
         "middlewares/whoops": "^2.0",
         "nyholm/psr7-server": "^0.4.1",
         "veka-server/discord-log": "^0.0.1",
-        "veka-server/redirect-error-500": "^0.0.3"
+        "veka-server/redirect-error-500": "^0.0.3",
+        "veka-server/bdd_mysql": "^0.1.0"
     },
     "require-dev": {
         "php-middleware/php-debug-bar": "^4.0"

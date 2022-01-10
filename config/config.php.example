@@ -3,7 +3,7 @@
  * A utiliser avec la classe de config de veka-server/config
  */
 
-$app_name = 'Timeker';
+$app_name = 'Timek';
 $root_dir = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR;
 
 return array(
@@ -19,10 +19,12 @@ return array(
     "PUBLIC_DIR"   => realpath($root_dir.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR),
 
     // BDD
-    "db_user" => '',
+    "db_user" => 'timetracker',
     "db_pass" => '',
-    "db_host" => '',
-    "db_name" => '',
+    "db_host" => '192.168.1.182',
+    "db_port" => '3306',
+    "db_name" => 'timetracker',
+    'db_charset' => '',
 
     // Discord
     "DISCORD_CHANNEL" => 'https://discordapp.com/api/webhooks/...',
