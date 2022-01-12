@@ -15,7 +15,7 @@ class ErrorCatch
             \VekaServer\DiscordLog\DiscordLog::sendLog($e);
         }
 
-        /** afficher un whoops si en DEV */
+        /** affichage si en DEV */
         if(Config::getInstance()->get('ENV') == 'DEV') {
 
             /** si whoops existe alors on l'utilise */
@@ -33,6 +33,7 @@ class ErrorCatch
 
         }
 
+        /** Exception pour les autres cas (PROD) */
         throw $e;
     }
 

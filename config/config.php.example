@@ -14,6 +14,9 @@ return array(
     // Environnement
     "ENV"   => 'DEV', // DEV / PROD
 
+    // PHP_BAR
+    "PHP_BAR"   => FALSE,
+
     // ARBORESCENCE
     "ROOT_DIR"   => realpath($root_dir),
     "PUBLIC_DIR"   => realpath($root_dir.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR),

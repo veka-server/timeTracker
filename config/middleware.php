@@ -11,10 +11,11 @@ use VekaServer\Config\Config;
 $psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
 $creator = new \Nyholm\Psr7Server\ServerRequestCreator($psr17Factory,$psr17Factory,$psr17Factory,$psr17Factory);
 
+$config = Config::getInstance();
 $tableau_middleware = [];
 
 /** DebugBar */
-if(Config::getInstance()->get('ENV') == 'DEV') {
+if($config->get('ENV') == 'DEV' && $config->get('PHP_BAR') === true) {
     $debugbarRenderer = \VekaServer\Container\Container::getInstance()->get('DebugBar')->getJavascriptRenderer('/phpdebugbar');
     $middleware_phpbar = new PhpMiddleware\PhpDebugBar\PhpDebugBarMiddleware($debugbarRenderer, $psr17Factory, $psr17Factory);
     $tableau_middleware[] = $middleware_phpbar;
@@ -23,8 +24,20 @@ if(Config::getInstance()->get('ENV') == 'DEV') {
 /** Redirection Erreur 500 */
 $tableau_middleware[] = new VekaServer\RedirectErrorPage\RedirectErrorPage('/500');
 
+/** Minifier CSS ET JS vers les url /css et /js */
+$tableau_middleware[] = new \VekaServer\Minifier\Minifier(
+    $config->get('PUBLIC_DIR').'/asset/css/'
+    , $config->get('PUBLIC_DIR').'/asset/js/'
+    ,86400
+);
+
+/** Hack pour les fichiers static avec le serveur HTTP de PHP !!! NE PAS UTILSER EN PROD !!! */
+if($config->get('ENV') == 'DEV') {
+    $tableau_middleware[] = new \VekaServer\HTTPServerBuiltInPHP\Hack($config->get('PUBLIC_DIR'));
+}
+
 /** Whoops */
-if(Config::getInstance()->get('ENV') == 'DEV') {
+if($config->get('ENV') == 'DEV') {
     $middleware_whoops = new Middlewares\Whoops();
     $tableau_middleware[] = $middleware_whoops;
 }
@@ -32,8 +45,8 @@ if(Config::getInstance()->get('ENV') == 'DEV') {
 /** DiscordLog */
 $tableau_middleware[] = new VekaServer\DiscordLog\DiscordLog(
     $psr17Factory
-    ,Config::getInstance()->get('DISCORD_CHANNEL')
-    ,Config::getInstance()->get('DISCORD_APP_NAME')
+    ,$config->get('DISCORD_CHANNEL')
+    ,$config->get('DISCORD_APP_NAME')
 );
 
 /** router */

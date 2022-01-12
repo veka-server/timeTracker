@@ -2,7 +2,6 @@
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use VekaServer\Config\Config;
 
 // utilisation du loader de composer
 require 'vendor/autoload.php';
@@ -19,10 +18,6 @@ try{
          */
         public function before_router(ServerRequestInterface $request)
         {
-            \App\classe\Hack::phpBuilInServerHttp(
-                Config::getInstance()->get('PUBLIC_DIR')
-            );
-
             // TODO: Implement before_router() method.
             return ;
         }
