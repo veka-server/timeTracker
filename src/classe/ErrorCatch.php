@@ -7,7 +7,7 @@ use VekaServer\Config\Config;
 class ErrorCatch
 {
 
-    /** recuperation de la version git */
+    /**  */
     public static function showError($e){
 
         /** envoi d'un discord si possible */
