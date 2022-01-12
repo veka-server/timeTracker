@@ -1,7 +1,7 @@
 <?php
 namespace App\controller;
 
-class Login extends \App\Controller\Controller
+class Login extends Controller
 {
 
     public function show_page(){
