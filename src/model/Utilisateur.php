@@ -1,8 +1,6 @@
 <?php
 namespace App\model;
 
-use VekaServer\Framework\Model;
-
 class Utilisateur extends Model
 {
 
