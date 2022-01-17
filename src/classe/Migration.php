@@ -2,6 +2,8 @@
 
 namespace App\classe;
 
+use VekaServer\Framework\Model;
+
 class Migration
 {
 
@@ -14,21 +16,20 @@ class Migration
     public function upgrade(){
 
         /** creer la table de migration si elle n'existe pas encore */
-
-        /** recuperer le numero de la derniere migration */
+        $sql = 'CREATE TABLE migration (
+                    id_migration integer NOT NULL AUTO_INCREMENT,
+                    filename text NOT NULL,
+                    date_upgrade datetime DEFAULT NOW(),
+                    PRIMARY KEY(id_migration)
+                );';
+        Model::exec($sql);
 
         /** recuperer les migrations qui n'ont pas encore été executé */
 
     }
 
     public function downgrade(){
-
-        /** creer la table de migration si elle n'existe pas encore */
-
-        /** recuperer le numero de la derniere migration */
-
-        /** recuperer les migrations qui n'ont pas encore été executé */
-
+        /** @todo a faire */
     }
 
 }

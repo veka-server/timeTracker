@@ -11,6 +11,11 @@ new class($root_path) extends \VekaServer\Framework\Console {
 
         $migration = new \App\classe\Migration($this->root_path.'/src/migration/');
 
+        /** @var \Psr\Log\LoggerInterface $log */
+        $log = \VekaServer\Container\Container::getInstance()->get('Log');
+
+        $log->debug('test ', $params);
+
         switch($params['direction'] ?? ''){
 
             case 'upgrade' :
