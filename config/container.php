@@ -27,6 +27,14 @@ return [
         ,'charset' => $config->get('db_charset')
     ])
 
+    /**
+     * Gestionnaire de LOG PSR-3
+     */
+    ,"Log" => new \VekaServer\Discord\Discord(
+        $config->get('DISCORD_CHANNEL')
+        ,$config->get('DISCORD_APP_NAME')
+    )
+
     ,"DebugBar" => new DebugBar\StandardDebugBar()
 
 ];

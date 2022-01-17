@@ -10,11 +10,6 @@ class ErrorCatch
     /**  */
     public static function showError($e){
 
-        /** envoi d'un discord si possible */
-        if(class_exists('\\VekaServer\\DiscordLog\\DiscordLog') && !empty(\VekaServer\DiscordLog\DiscordLog::$defaut_chanel)) {
-            \VekaServer\DiscordLog\DiscordLog::sendLog($e);
-        }
-
         /** affichage si en DEV */
         if(Config::getInstance()->get('ENV') == 'DEV') {
 

@@ -42,10 +42,9 @@ if($config->get('ENV') == 'DEV') {
     $tableau_middleware[] = $middleware_whoops;
 }
 
-/** DiscordLog */
-$tableau_middleware[] = new VekaServer\DiscordLog\DiscordLog(
-    $psr17Factory
-    ,$config->get('DISCORD_CHANNEL')
+/** Discord PSR-15 */
+$tableau_middleware[] = new VekaServer\Discord\Discord(
+    $config->get('DISCORD_CHANNEL')
     ,$config->get('DISCORD_APP_NAME')
 );
 
