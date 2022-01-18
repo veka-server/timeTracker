@@ -19,5 +19,13 @@
     },
     "require-dev": {
         "php-middleware/php-debug-bar": "^4.0"
+    },
+    "scripts": {
+        "migration": [
+            "@php vendor/veka-server/app/bin/migration.php"
+        ]
+    },
+    "scripts-descriptions": {
+        "migration": "Database Migration system"
     }
 }

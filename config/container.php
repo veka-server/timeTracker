@@ -11,8 +11,8 @@ return [
      * Moteur de template qui doit étendre VekaServer\Interfaces
      */
     "Renderer" => new \VekaServer\TwigRenderer\TwigRenderer(
-        __DIR__.'/../src/view/',
-        false /* __DIR__.'\../cache/' */
+        $config->get('ROOT_DIR').'/src/view/',
+        false /* $config->get('ROOT_DIR').'\../cache/' */
     )
 
     /**
