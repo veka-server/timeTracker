@@ -14,6 +14,12 @@ return array(
     // Environnement
     "ENV"   => 'DEV', // DEV / PROD
 
+    // Migration
+    "Migration"   => [
+        /** migration de l'app principal */
+        'App' => ['path' => realpath($root_dir.'/src/migration/'), 'name' => 'App']
+    ],
+
     // PHP_BAR
     "PHP_BAR"   => FALSE,
 
