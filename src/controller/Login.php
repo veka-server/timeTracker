@@ -8,6 +8,11 @@ class Login extends Controller
 
     public function show_page(){
 
+        if(\App\classe\Utilisateur::isConnected()){
+            header('Location: /');
+            die();
+        }
+
         $params = [
             'surcharge_template' => 'common/template_login.twig'
         ];
