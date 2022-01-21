@@ -11,9 +11,8 @@ class Dashboard extends Controller
      */
     public function show_page(): string
     {
-
-        $rs = Utilisateur::getAllUtilisateur();
-        $msg = 'connecté : '.$rs[0]['nom'];
+        $rs = Utilisateur::getByID($_SESSION['utilisateur']['id_utilisateur']);
+        $msg = PHP_EOL.'<br/> connecté : '.$rs[0]['nom'];
 
         $params = [
             'content' => $msg

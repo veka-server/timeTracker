@@ -20,6 +20,8 @@ return array(
         'App' => ['path' => realpath($root_dir.'/src/migration/'), 'name' => 'App']
     ],
 
+    "login_page" => '/login',
+
     // PHP_BAR
     "PHP_BAR"   => FALSE,
 
