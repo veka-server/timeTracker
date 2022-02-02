@@ -1,0 +1,17 @@
+{% set uniqid = "tableau_id_" ~ "now"|date("Ymdhisu") ~ random(1, 9999999999999) %}
+<table id="{{ uniqid }}" class="table_with_pagination">
+    <thead>
+        <tr>
+            {% for column in columns %}
+                <th scope="col">{{ column.label }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody data-liste-url="{{ urlListe }}"></tbody>
+    {{ include('common/table/footer.twig') }}
+</table>
+<script>
+$(window).load(function() {
+    new Pagination($("#{{ uniqid }}"));
+});
+</script>

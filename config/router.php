@@ -15,6 +15,10 @@ return (new \VekaServer\Rooter\Rooter())
     // Page de deconnexion
     ->get('/logout',function(){(new \App\controller\Login())->logout();})
 
+    // Page de gestion des utilisateurs
+    ->get('/utilisateur',function(){echo (new \App\controller\Utilisateur())->liste();})
+    ->post('/utilisateur/liste',function(){echo (new \App\controller\Utilisateur())->ajax_liste();})
+
     // Page dashboard
     ->get('/',function(){
         // required user connected

@@ -78,6 +78,13 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
         $pass = \App\classe\Utilisateur::hash('0000');
         $sql = 'INSERT INTO utilisateurs (nom, prenom, email, password) VALUES ( \'dupond\', \'nicolas\', \'test@test.fr\', \''.$pass.'\')';
         self::exec($sql);
+
+        for ($i=0;$i<=150; $i++){
+            $pass = \App\classe\Utilisateur::hash('0000'.$i);
+            $sql = 'INSERT INTO utilisateurs (nom, prenom, email, password) VALUES ( \'dupond\', \'nicolas '.$i.'\', \'test'.$i.'@test.fr\', \''.$pass.'\')';
+            self::exec($sql);
+        }
+
     }
 
     /**
@@ -90,7 +97,6 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
     public function upgrade_nettoyage()
     {
         // TODO: Implement upgrade_nettoyage() method.
-        throw new \Exception('eeeeeeeeeeee');
     }
 
     /**

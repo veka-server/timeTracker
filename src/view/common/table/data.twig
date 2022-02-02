@@ -1,0 +1,7 @@
+{% for ligne in cleaned_data %}
+    <tr>
+    {% for key,value in ligne %}
+            <td data-label="{{ key }}">{{ value }}</td>
+    {% endfor %}
+    </tr>
+{% endfor %}

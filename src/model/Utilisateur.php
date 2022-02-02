@@ -6,7 +6,7 @@ class Utilisateur extends Model
 
     public static function getAll(){
         $sql = 'SELECT * FROM utilisateurs';
-        return self::exec($sql);
+        return self::exec_pagination($sql);
     }
 
     public static function getByEmail($email){
