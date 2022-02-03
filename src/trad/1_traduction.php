@@ -70,6 +70,9 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
 
         Lang::set('date_creation', 'FR', 'date de création');
         Lang::set('date_creation', 'EN', 'added date');
+
+        Lang::set('tableau_msg_clic_refresh', 'FR', 'cliquez ici pour recharger le tableau');
+        Lang::set('tableau_msg_clic_refresh', 'EN', 'click here to refresh');
     }
 
     /**
@@ -111,13 +114,13 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
      */
     public function downgrade_nettoyage()
     {
+        $sql = 'DROP TABLE traduction__value ;';
+        self::exec($sql);
+
         $sql = 'DROP TABLE traduction__key ;';
         self::exec($sql);
 
         $sql = 'DROP TABLE traduction__lang ;';
-        self::exec($sql);
-
-        $sql = 'DROP TABLE traduction__value ;';
         self::exec($sql);
     }
 };

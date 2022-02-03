@@ -1,6 +1,7 @@
 <?php
 namespace App\controller;
 
+use App\exception\TableauException;
 use VekaServer\Framework\Lang;
 
 class Utilisateur extends Controller
@@ -46,6 +47,8 @@ class Utilisateur extends Controller
 
             /** recupere les données brut */
             $utilisateurs = \App\model\Utilisateur::getAll();
+
+//            throw new TableauException('echec volontaire de recup des données');
 
             /** ajoute les données aux tableau */
             $this->getTableau()->setData($utilisateurs);

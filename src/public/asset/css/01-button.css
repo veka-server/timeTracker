@@ -1,0 +1,32 @@
+/**
+    buttons
+ */
+
+.button {
+    display: inline-block;
+    padding: 7px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    background: rgba(0,0,0,0.7);
+    color:white;
+}
+.button.bleu:hover { background: rgb(122, 122, 122);}
+
+.button + .button {margin-left:10px;}
+
+.button.grey_inside_table { background: rgba(0,0,0,0.3);}
+.button.grey_inside_table:hover { background: rgba(0,0,0,0.2);}
+
+.button.bleu { background:#008CBA;}
+.button.bleu:hover { background: rgb(1, 126, 166);}
+
+.button.rouge { background:#F44336;}
+.button.rouge:hover { background: #e03e32;}
+
+.button.vert { background:#4CAF50;}
+.button.vert:hover { background: #469f49;}
+
+.button.orange { background:#f29e37;}
+.button.orange:hover { background: #d28931;}

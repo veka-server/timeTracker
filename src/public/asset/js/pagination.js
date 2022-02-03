@@ -1,14 +1,15 @@
 
     class Pagination {
 
-        constructor(table) {
+        constructor(table, msg_clic_refresh) {
             this.table = table;
+
+            this.msg_clic_refresh = msg_clic_refresh;
 
             this.xhr;
 
             this.order_by = null;
 
-            this.table = table;
             this.pagination = $(this.table).find('.pagination');
 
             this.envoi_first = $(this.pagination).find('.envoi_first');
@@ -25,11 +26,6 @@
             this.old_filtre = '';
 
             const current_instance = this;
-
-            // ajouter le colspan dans le footer du tableau
-            $(this.table).each(function() {
-                $(this).find('tfoot > tr td').attr('colspan', current_instance.getMaxColCount())
-            });
 
             $(this.page_curr).off().change(function(){
                 const current_val = $(current_instance.page_curr).val();
@@ -80,8 +76,15 @@
             });
 
             $(this.table).on('Tableau::show_error_inside_tableau', function(event){
-                $(current_instance.table).find('tbody').html('<tr><td class="error_msg"><i class="fas fa-exclamation-triangle" style="font-size: 3em;"></i><br/><br/>'+event.msg+'<br/><br/>cliquez ici pour recharger les données</td></tr>')
+                $(current_instance.table).find('tbody').html('<tr><td class="error_msg"><i class="fas fa-exclamation-triangle" style="font-size: 3em;"></i><br/><br/>'+event.msg+'<br/><br/>' +
+                    '<span class="button grey_inside_table refresh_tableau">'+current_instance.msg_clic_refresh+'</span>' +
+                    '</td></tr>')
                 $(current_instance.table).find('tbody > tr td').attr('colspan', current_instance.getMaxColCount())
+
+                $(current_instance.table).find('.refresh_tableau').click(function(){
+                    current_instance.getTableau();
+                });
+
             });
 
             $(this.table).find('table').on('Pagination_call_me_with_filter', function(event, event_name_response){
@@ -184,20 +187,15 @@
          * show / hide nombre max de page
          */
         update(response){
-            console.log('update')
 
-            if(response.page_curr !== $(this.page_curr).val()){
-                return ;
-            }
-
+            /*
             if(response.no_nb_page === undefined || response.no_nb_page != true){
                 $(this.page_curr).attr('max',response.page_nb)
                 $(this.page_nb).html(' / '+response.page_nb);
             } else {
                 $(this.page_curr).attr('max',0)
             }
-
-            $(this.request_time).html(response.request_time);
+             */
 
             if($(this.page_curr).val() == 1) {
                 $(this.envoi_first).hide();
@@ -292,6 +290,9 @@
 
         /** ajax + update content tableau */
         getTableau(force_page_curr){
+
+            // remove error message si present
+            $(this.table).find('.error_msg').closest('tr').remove();
 
             if(this.xhr){
                 this.xhr.abort();

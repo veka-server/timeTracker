@@ -7,11 +7,18 @@
             {% endfor %}
         </tr>
     </thead>
-    <tbody data-liste-url="{{ urlListe }}"></tbody>
+    <tbody data-liste-url="{{ urlListe }}">
+        <tr>
+            <td colspan="{{ columns|length }}"></td>
+        </tr>
+    </tbody>
     {{ include('common/table/footer.twig') }}
 </table>
 <script>
 $(window).load(function() {
-    new Pagination($("#{{ uniqid }}"));
+    new Pagination(
+        $("#{{ uniqid }}")
+        ,'{{ "tableau_msg_clic_refresh" | lang | escape('js') }}'
+    );
 });
 </script>
