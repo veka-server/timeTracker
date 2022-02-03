@@ -1,6 +1,7 @@
 <?php
 
 use App\model\Model;
+use VekaServer\Framework\Lang;
 
 return new class() extends Model implements \VekaServer\Interfaces\MigrationInterface {
 
@@ -18,13 +19,13 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
         $sql = 'CREATE TABLE IF NOT EXISTS traduction__key (
                     id_traduction_key int NOT NULL PRIMARY KEY AUTO_INCREMENT,
                     uniq_key varchar(128) NOT NULL UNIQUE
-                );';
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;';
         self::exec($sql);
 
         $sql = 'CREATE TABLE IF NOT EXISTS traduction__lang (
                     id_traduction_lang int NOT NULL PRIMARY KEY AUTO_INCREMENT,
                     lang varchar(32) NOT NULL UNIQUE
-                );';
+                )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;';
         self::exec($sql);
 
         $sql = 'CREATE TABLE IF NOT EXISTS traduction__value (
@@ -32,7 +33,7 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
                     id_traduction_lang int NOT NULL,
                     trad text NOT NULL,
                     PRIMARY KEY(id_traduction_key, id_traduction_lang)
-                );';
+                )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;';
         self::exec($sql);
     }
 
@@ -45,16 +46,28 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
      */
     public function upgrade_data()
     {
-        $trad = new \App\classe\Lang('FR');
-
         /** Creer les langues */
-        $trad->addLang('FR');
-        $trad->addLang('EN');
+        Lang::addLang('FR');
+        Lang::addLang('EN');
 
         /** ajout des traductions */
-        $trad->set('user_management', 'FR', 'Gestion des utilisateurs');
-        $trad->set('user_management', 'EN', 'User management');
+        Lang::set('user_management', 'FR', 'Gestion des utilisateurs');
+        Lang::set('user_management', 'EN', 'User management');
 
+        Lang::set('nb_result_per_page', 'FR', 'nb / page');
+        Lang::set('nb_result_per_page', 'EN', 'nb / page');
+
+        Lang::set('nom', 'FR', 'nom');
+        Lang::set('nom', 'EN', 'last name');
+
+        Lang::set('prenom', 'FR', 'prénom');
+        Lang::set('prenom', 'EN', 'first name');
+
+        Lang::set('email', 'FR', 'email');
+        Lang::set('email', 'EN', 'email');
+
+        Lang::set('date_creation', 'FR', 'date de création');
+        Lang::set('date_creation', 'EN', 'added date');
     }
 
     /**
