@@ -13,6 +13,7 @@ return [
     "Renderer" => new \VekaServer\TwigRenderer\TwigRenderer(
         $config->get('ROOT_DIR').'/src/view/',
         false /* $config->get('ROOT_DIR').'\../cache/' */
+        ,[\VekaServer\Framework\Lang::class, 'get'] /* methode appelé pour les traductions */
     )
 
     /**
