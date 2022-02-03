@@ -1,19 +1,35 @@
 {% set uniqid = "tableau_id_" ~ "now"|date("Ymdhisu") ~ random(1, 9999999999999) %}
-<table id="{{ uniqid }}" class="table_with_pagination">
-    <thead>
+<div class="container_table">
+    <div class="show_filter button bleu" style="display: none;"><i class="fas fa-filter"></i> {{ "show_filtre" | lang }}</div>
+    <table id="{{ uniqid }}" class="table_with_pagination">
+        <thead>
         <tr>
             {% for column in columns %}
-                <th scope="col">{{ column.label }}</th>
+                <th scope="col" >
+                    <span class="{% if column.sort == true %}field_order_by{% endif %}" data-sort="{{ column.key }}">{{ column.label }}</span>
+                </th>
             {% endfor %}
         </tr>
-    </thead>
-    <tbody data-liste-url="{{ urlListe }}">
-        <tr>
+        <tr class="filter_header">
+            {% for column in columns %}
+                <th>
+                    {% if column.filter == true %}
+                    <div class="slideme hidden" >
+                        <input type="text" class="filtre_colonne" name="{{ column.key }}" />
+                    </div>
+                    {% endif %}
+                </th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody data-liste-url="{{ urlListe }}">
+        <tr class="origin_tr">
             <td colspan="{{ columns|length }}"></td>
         </tr>
-    </tbody>
-    {{ include('common/table/footer.twig') }}
-</table>
+        </tbody>
+        {{ include('common/table/footer.twig') }}
+    </table>
+</div>
 <script>
 $(window).load(function() {
     new Pagination(

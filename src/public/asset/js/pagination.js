@@ -20,12 +20,16 @@
             this.page_nb = $(this.pagination).find('.page_nb');
             this.page_size = $(this.pagination).find('.page_size');
             this.request_time = $(this.pagination).find('.request_time');
-            this.export_btn_with_pagination = $(this.table).closest('.contentTable').find('.export_btn_with_pagination');
-            this.field_order_by = $(this.table).closest('.contentTable').find('.field_order_by');
+            this.export_btn_with_pagination = $(this.table).find('.export_btn_with_pagination');
+            this.field_order_by = $(this.table).find('.field_order_by');
 
             this.old_filtre = '';
 
             const current_instance = this;
+
+            if($(this.table).find('.filter_header .slideme').length > 0){
+                $(this.table).closest('.container_table').find('.show_filter').show();
+            }
 
             $(this.page_curr).off().change(function(){
                 const current_val = $(current_instance.page_curr).val();
@@ -113,13 +117,13 @@
             });
 
             // gestion des order by
-            this.field_order_by.each(function(){
+            $(current_instance.field_order_by).each(function(){
 
-                $(this).click(function(){
+                $(this).after().click(function(){
 
                     const elem = $(this);
 
-                    const remove_list = $(this.table).closest('.contentTable').find('.field_order_by:not([data-sort="' + $(elem).attr('data-sort') + '"])');
+                    const remove_list = $(this.table).find('.field_order_by:not([data-sort="' + $(elem).attr('data-sort') + '"])');
                     remove_list.removeClass('down');
                     remove_list.removeClass('up');
 
@@ -141,15 +145,21 @@
             });
 
             /** gestion des order by up actif au chargement de la page */
-            table.find('[data-default-sort="up"]').each(function(){
+            $(this.table).find('[data-default-sort="up"]').each(function(){
                 $(this).addClass('up');
                 this.order_by = $(this).attr('data-sort')+'-asc';
             });
 
             /** gestion des order by down actif au chargement de la page */
-            table.find('[data-default-sort="down"]').each(function(){
+            $(this.table).find('[data-default-sort="down"]').each(function(){
                 $(this).addClass('down');
                 this.order_by = $(this).attr('data-sort')+'-desc';
+            });
+
+            /** gestion des order by down actif au chargement de la page */
+            $(this.table).closest('.container_table').find('.show_filter').click(function(){
+                $(current_instance.table).find('.filter_header .slideme').slideToggle();
+                $(this).toggleClass('active');
             });
 
             this.getTableau();

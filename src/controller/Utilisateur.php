@@ -1,7 +1,6 @@
 <?php
 namespace App\controller;
 
-use App\exception\TableauException;
 use VekaServer\Framework\Lang;
 
 class Utilisateur extends Controller
@@ -18,10 +17,11 @@ class Utilisateur extends Controller
 
         $this->tableau = new Tableau();
         $this->tableau->setUrlListe('/utilisateur/liste');
-        $this->tableau->addColumn(['label' => Lang::get('nom'),'key' => 'nom']);
-        $this->tableau->addColumn(['label' => Lang::get('prenom'),'key' => 'prenom']);
-        $this->tableau->addColumn(['label' => Lang::get('email'),'key' => 'email']);
-        $this->tableau->addColumn(['label' => Lang::get('date_creation'),'key' => 'date_creation']);
+        $this->tableau->addColumn(['label' => Lang::get('nom'),'key' => 'nom', 'sort' => true, 'filter' => true]);
+        $this->tableau->addColumn(['label' => Lang::get('prenom'),'key' => 'prenom', 'sort' => true, 'filter' => true]);
+        $this->tableau->addColumn(['label' => Lang::get('email'),'key' => 'email', 'sort' => true, 'filter' => true]);
+        $this->tableau->addColumn(['label' => Lang::get('date_creation'),'key' => 'date_creation', 'sort' => true, 'filter' => true]);
+
         return $this->tableau;
     }
 
@@ -47,8 +47,6 @@ class Utilisateur extends Controller
 
             /** recupere les données brut */
             $utilisateurs = \App\model\Utilisateur::getAll();
-
-//            throw new TableauException('echec volontaire de recup des données');
 
             /** ajoute les données aux tableau */
             $this->getTableau()->setData($utilisateurs);

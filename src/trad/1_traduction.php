@@ -73,6 +73,9 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
 
         Lang::set('tableau_msg_clic_refresh', 'FR', 'cliquez ici pour recharger le tableau');
         Lang::set('tableau_msg_clic_refresh', 'EN', 'click here to refresh');
+
+        Lang::set('show_filtre', 'FR', 'filtres');
+        Lang::set('show_filtre', 'EN', 'filters');
     }
 
     /**

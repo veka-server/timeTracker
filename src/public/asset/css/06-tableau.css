@@ -7,10 +7,14 @@ table tr{background-color:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.20);pad
 table th,table td{padding:.625em;text-align:center}
 table th{background: #6a7db6;color:#fff}
 table th{font-size:.85em;letter-spacing:.1em;text-transform:uppercase}
-table tbody{min-height:50px;height: 50px;background: white;width: 100%;}
+table tbody{min-height:50px;height: 50px;width: 100%;}
 table tbody tr:nth-child(odd) td{background:white}
 table tbody tr:hover td:not(.error_msg) , table tbody tr:nth-child(odd):hover td:not(.error_msg){background: rgba(106, 125, 182, 0.15)}
-table tbody tr td.error_msg{background:rgba(0,0,0,0.35);color:white;height: 150px;}
+table tbody tr td.error_msg{background:rgba(0,0,0,0.35);color:white;height: 300px;}
+
+table thead .filter_header {padding: 0}
+table thead .filter_header th {padding: 0}
+table thead .filter_header th .slideme {padding: 8.5px}
 
 @-webkit-keyframes spin {
     0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}
@@ -22,7 +26,8 @@ table tbody tr td.error_msg{background:rgba(0,0,0,0.35);color:white;height: 150p
 }
 
 /* loader */
-table tbody.loading{position:relative;min-height:60px;overflow: hidden}
+table tbody.loading{position:relative;overflow: hidden}
+table tbody.loading > tr.origin_tr > td{height:300px;}
 table tbody.loading::before{content:'';display:inline-block;width:100%;height:100%;position:absolute;top:0;left:0;background:rgba(0,0,0,0.35);z-index:9}
 table tbody.loading::after{font-family:"Font Awesome 5 Free";content:"\f021";font-weight: 900;display:inline-block;width:40px;height:40px;position:absolute;top:calc(50% - 20px);left:calc(50% - 20px);color:#fff;z-index:10;-webkit-animation:spin 2s infinite linear;animation:spin 2s infinite linear;text-align:center;font-size:40px;line-height:40px}
 
@@ -34,6 +39,15 @@ tfoot.footer .page_size_container{display:inline-block;width:150px;color:#fff}
 tfoot.footer .pagination_btn a{cursor:pointer;border:1px solid rgba(0,0,0,0.3);border-radius:3px;width:30px;display:inline-block;text-align:center;font-size:20px;padding:4px;box-sizing:border-box;vertical-align:middle;color:rgba(0,0,0,0.7);background:#fff}
 tfoot.footer .pagination_btn a:hover{background:rgba(255,255,255,0.8)}
 tfoot.footer .pagination_btn input{border:1px solid rgba(0,0,0,0.3);border-radius:3px;width:60px;display:inline-block;text-align:center;height:30px;line-height:30px;box-sizing:border-box;vertical-align:middle}
+
+.field_order_by{cursor:pointer}
+.field_order_by::after{font-family:'Font Awesome 5 Free';padding-left:5px;content:"\f0dc";cursor:pointer}
+.field_order_by.down::after{content:"\f0dd"}
+.field_order_by.up::after{content:"\f0de"}
+
+.container_table .show_filter {float: right;max-width: 30px;overflow: hidden; text-overflow: clip; white-space: nowrap;color:transparent;transition: max-width .6s;margin-bottom:0.3em;}
+.container_table .show_filter i {color:white}
+.container_table .show_filter:hover, .container_table .show_filter.active {max-width: 300px;color:white;}
 
 @media screen and (max-width: 600px) {
     table{border:0}
