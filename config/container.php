@@ -35,6 +35,11 @@ return [
         ,$config->get('DISCORD_APP_NAME')
     )
 
+    /**
+     * Gestionnaire de traductions
+     */
+    ,"Lang" => new \App\classe\Lang($config->get('DEFAULT_LANG'))
+
     ,"DebugBar" => new DebugBar\StandardDebugBar()
 
 ];

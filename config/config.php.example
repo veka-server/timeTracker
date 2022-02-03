@@ -14,10 +14,13 @@ return array(
     // Environnement
     "ENV"   => 'DEV', // DEV / PROD
 
+    "DEFAULT_LANG"   => 'FR',
+
     // Migration
     "Migration"   => [
         /** migration de l'app principal */
         'App' => ['path' => realpath($root_dir.'/src/migration/'), 'name' => 'App']
+        ,'Trad' => ['path' => realpath($root_dir.'/src/trad/'), 'name' => 'Trad']
     ],
 
     "login_page" => '/login',
