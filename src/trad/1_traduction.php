@@ -32,7 +32,9 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
                     id_traduction_key int NOT NULL,
                     id_traduction_lang int NOT NULL,
                     trad text NOT NULL,
-                    PRIMARY KEY(id_traduction_key, id_traduction_lang)
+                    PRIMARY KEY(id_traduction_key, id_traduction_lang),
+                    FOREIGN KEY (id_traduction_key) REFERENCES traduction__key(id_traduction_key),
+                    FOREIGN KEY (id_traduction_lang) REFERENCES traduction__lang(id_traduction_lang)
                 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;';
         self::exec($sql);
     }
