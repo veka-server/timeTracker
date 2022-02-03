@@ -15,7 +15,8 @@
         "veka-server/bdd_mysql": "^0.1.0",
         "veka-server/minifier": "^0.1.1",
         "veka-server/http-server-built-in-php": "^0.1.2",
-        "veka-server/discord": "^0.1.1"
+        "veka-server/discord": "^0.1.1",
+        "veka-server/lang": "^0.1.1"
     },
     "require-dev": {
         "php-middleware/php-debug-bar": "^4.0"
