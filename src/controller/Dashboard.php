@@ -6,6 +6,9 @@ use App\model\Utilisateur;
 class Dashboard extends Controller
 {
 
+    /** @var string $menu menu gauche actif */
+    protected static $menu = 'dashboard';
+
     /**
      * @throws \Exception
      */

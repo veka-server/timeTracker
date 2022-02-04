@@ -24,25 +24,28 @@
         <span style="font-size: 0.7em; color:rgba(255,255,255,0.7); font-weight:bold; letter-spacing: 0.3em; text-transform: uppercase;">{{version}}</span>
     </div>
 
-    <div class="categorie_menu">Navigation</div>
+    <div class="categorie_menu">{{ "menu.navigation" | lang }}</div>
     <ul>
         <li>
             <a href="/">
-                <strong class="active"><i class="fas fa-home"></i> Dashboard</strong>
+                <strong {% if active_menu == "dashboard" %}class="active"{% endif %}><i class="fas fa-home"></i>
+                    {{ "menu.dashboard" | lang }}</strong>
             </a>
         </li>
         <li>
             <a href="/">
-                <strong><i class="fas fa-hourglass-half"></i> Temps</strong>
+                <strong {% if active_menu == "temps" %}class="active"{% endif %}><i class="fas fa-hourglass-half"></i>
+                    {{ "menu.temps" | lang }}</strong>
             </a>
         </li>
     </ul>
 
-    <div class="categorie_menu">Administration</div>
+    <div class="categorie_menu">{{ "menu.administration" | lang }}</div>
     <ul>
         <li>
             <a href="/utilisateur">
-                <strong><i class="fas fa-euro-sign"></i> Utilisateurs</strong>
+                <strong {% if active_menu == "utilisateur" %}class="active"{% endif %}><i class="fas fa-euro-sign"></i>
+                    {{ "menu.utilisateurs" | lang }}</strong>
             </a>
         </li>
 <!--

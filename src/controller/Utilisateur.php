@@ -6,6 +6,9 @@ use VekaServer\Framework\Lang;
 class Utilisateur extends Controller
 {
 
+    /** @var string $menu menu gauche actif */
+    protected static $menu = 'utilisateur';
+
     private $tableau = null;
 
     /** definie la structure du tableau a afficher a l'écran */

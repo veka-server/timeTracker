@@ -7,6 +7,7 @@
     background: white;
     border:1px solid rgba(0,0,0,0.20);
     box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+    border-radius: 5px;
 }
 
 table{border:1px solid rgba(0,0,0,0.20);border-collapse:collapse;margin:0;padding:0;width:100%;table-layout:fixed;}
@@ -44,8 +45,8 @@ table tbody.loading::after{font-family:"Font Awesome 5 Free";content:"\f021";fon
 tfoot.footer{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
 tfoot.footer > tr{text-align:left;background: rgba(0,0,0,0.06);}
 tfoot.footer > tr td{text-align:left}
-tfoot.footer .pagination_btn{text-align:right;display:inline-block;width:calc(100% - 155px)}
-tfoot.footer .page_size_container{display:inline-block;width:150px;}
+tfoot.footer .pagination_btn{text-align:right;display:inline-block;width:calc(100% - 205px)}
+tfoot.footer .page_size_container{display:inline-block;width:200px;}
 tfoot.footer .pagination_btn a{cursor:pointer;border:1px solid rgba(0,0,0,0.3);border-radius:3px;width:30px;display:inline-block;text-align:center;font-size:20px;padding:4px;box-sizing:border-box;vertical-align:middle;color:rgba(0,0,0,0.7);background:#fff}
 tfoot.footer .pagination_btn a:hover{background:rgba(255,255,255,0.8)}
 tfoot.footer .pagination_btn input{border:1px solid rgba(0,0,0,0.3);border-radius:3px;width:60px;display:inline-block;text-align:center;height:30px;line-height:30px;box-sizing:border-box;vertical-align:middle}

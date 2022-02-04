@@ -56,9 +56,6 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
         Lang::set('user_management', 'FR', 'Gestion des utilisateurs');
         Lang::set('user_management', 'EN', 'User management');
 
-        Lang::set('nb_result_per_page', 'FR', 'nb / page');
-        Lang::set('nb_result_per_page', 'EN', 'nb / page');
-
         Lang::set('nom', 'FR', 'nom');
         Lang::set('nom', 'EN', 'last name');
 
@@ -76,6 +73,30 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
 
         Lang::set('show_filtre', 'FR', 'filtres');
         Lang::set('show_filtre', 'EN', 'filters');
+
+        Lang::set('new_row', 'FR', 'nouvelle ligne');
+        Lang::set('new_row', 'EN', 'new entry');
+
+        Lang::set('export', 'FR', 'export');
+        Lang::set('export', 'EN', 'export');
+
+        Lang::set('nb_ligne_afficher', 'FR', 'résultats affiché');
+        Lang::set('nb_ligne_afficher', 'EN', 'entries displayed');
+
+        Lang::set('menu.utilisateurs', 'FR', 'Utilisateurs');
+        Lang::set('menu.utilisateurs', 'EN', 'Users');
+
+        Lang::set('menu.dashboard', 'FR', 'Tableau de bord');
+        Lang::set('menu.dashboard', 'EN', 'Dashboard');
+
+        Lang::set('menu.temps', 'FR', 'Temps');
+        Lang::set('menu.temps', 'EN', 'Times');
+
+        Lang::set('menu.administration', 'FR', 'administration');
+        Lang::set('menu.administration', 'EN', 'administration');
+
+        Lang::set('menu.navigation', 'FR', 'Navigation');
+        Lang::set('menu.navigation', 'EN', 'Navigation');
     }
 
     /**

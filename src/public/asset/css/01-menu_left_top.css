@@ -1,5 +1,5 @@
 #header{position:fixed;top:0;right:0;left:0;z-index:2;transition:left .2s}
-#sidedrawer{border-right:2px solid rgb(211, 211, 211);position:fixed;top:0;bottom:0;width:200px;left:-200px;overflow:auto;z-index:2;background-color:#0B2559;color:rgba(255,255,255,0.7);transition:transform .2s}
+#sidedrawer{position:fixed;top:0;bottom:0;width:200px;left:-200px;overflow:auto;z-index:2;background-color:#26243c;color:rgba(255,255,255,0.7);transition:transform .2s}
 #content-wrapper{min-height:100%;overflow-x:hidden;margin-left:0;transition:margin-left .2s;box-sizing:border-box;margin-bottom:-60px;padding-bottom:60px}
 .icon_site{width:35px;height:35px;display:inline-block;vertical-align:middle}
 .titre-bar-principal {margin-left:20px;}
@@ -16,17 +16,30 @@
 
 #sidedrawer.active{transform:translate(200px)}
 .sidedrawer-toggle{color:#0B2559;cursor:pointer;font-size:20px;line-height:20px;margin-right:10px}
-.sidedrawer-toggle:hover{color:#0B2559;}
+.sidedrawer-toggle:hover{color:rgba(255,255,255,0.2);}
 #sidedrawer-brand{padding-left:20px}
 #sidedrawer ul{list-style:none}
 #sidedrawer > ul{padding-left:0}
 #sidedrawer > ul > li:first-child{padding-top:7px}
-#sidedrawer strong{display:block;padding:9px 22px;cursor:pointer; font-weight: bold; font-size:0.9em; letter-spacing: 0.05em; text-transform: initial; color:rgba(255,255,255,0.6);}
+#sidedrawer strong{display:block;padding:9px 22px;cursor:pointer; font-weight: bold; font-size: 14px; line-height: 22px; letter-spacing: 0.05em; color:rgba(255,255,255,0.6);text-transform: capitalize;}
 #sidedrawer strong i {width:18px;color:rgba(255,255,255,0.35);font-size:1.2em; }
-#sidedrawer strong.active{background-color: rgba(12, 46, 110, 0.6); color:rgba(255,255,255,0.74);}
-#sidedrawer strong.active i {color:rgba(255,255,255,0.74);}
-#sidedrawer strong:hover{background-color:#0C2E6E; color:rgba(255,255,255,0.8);}
-#sidedrawer strong:hover i {color:rgba(255,255,255,0.8);}
+#sidedrawer strong.active{ color: #3d3393;position: relative; }
+#sidedrawer strong.active:before{content:''; display:block; width: 100%; height: 100%; position: absolute;top:0;left: 0;z-index: -1;
+    border-radius: 0 150px 150px 0  ;
+    -moz-border-radius: 0 150px 150px 0 ;
+    -webkit-border-radius: 0 150px 150px 0 ;
+    background:#EEEEEE;
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    margin-left:10px;
+
+}
+#sidedrawer strong.active i {color:#5446cf;z-index: 10; }
+#sidedrawer strong:not(.active):hover{background-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.8);}
+#sidedrawer strong:not(.active):hover i {color:rgba(255,255,255,0.8);}
 #sidedrawer strong + ul > li{padding:6px 0}
 #sidedrawer > ul i {padding-right:10px}
 
