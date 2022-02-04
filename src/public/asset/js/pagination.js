@@ -1,16 +1,14 @@
 
     class Pagination {
 
-        constructor(table, msg_clic_refresh) {
+        constructor(table) {
             this.table = table;
-
-            this.msg_clic_refresh = msg_clic_refresh;
 
             this.xhr;
 
             this.order_by = null;
 
-            this.pagination = $(this.table).find('.pagination');
+            this.pagination = $(this.table).closest('.container_table').find('.pagination');
 
             this.envoi_first = $(this.pagination).find('.envoi_first');
             this.envoi_previous = $(this.pagination).find('.envoi_previous');
@@ -27,7 +25,7 @@
 
             const current_instance = this;
 
-            if($(this.table).find('.filter_header .slideme').length > 0){
+            if($(this.table).find('.slideme').length > 0){
                 $(this.table).closest('.container_table').find('.show_filter').show();
             }
 
@@ -80,15 +78,14 @@
             });
 
             $(this.table).on('Tableau::show_error_inside_tableau', function(event){
-                $(current_instance.table).find('tbody').html('<tr><td class="error_msg"><i class="fas fa-exclamation-triangle" style="font-size: 3em;"></i><br/><br/>'+event.msg+'<br/><br/>' +
-                    '<span class="button grey_inside_table refresh_tableau">'+current_instance.msg_clic_refresh+'</span>' +
-                    '</td></tr>')
-                $(current_instance.table).find('tbody > tr td').attr('colspan', current_instance.getMaxColCount())
-
-                $(current_instance.table).find('.refresh_tableau').click(function(){
+                $(current_instance.table).closest('.table_wrapper').addClass('hide_scroll');
+                $(current_instance.table).closest('.table_wrapper').scrollTop(0);
+                $(current_instance.table).closest('.table_wrapper').scrollLeft(0);
+                $(current_instance.table).closest('.table_wrapper').find('.error_msg').show();
+                $(current_instance.table).closest('.table_wrapper').find('.msg_error').html(event.msg);
+                $(current_instance.table).closest('.table_wrapper').find('.refresh_tableau').click(function(){
                     current_instance.getTableau();
                 });
-
             });
 
             $(this.table).find('table').on('Pagination_call_me_with_filter', function(event, event_name_response){
@@ -98,11 +95,13 @@
             });
 
             $(this.table).find('table').on('Pagination_add_loading', function(){
-                $(current_instance.table).find('tbody').addClass('loading');
+                $(current_instance.table).closest('.table_wrapper').scrollTop(0);
+                $(current_instance.table).closest('.table_wrapper').scrollLeft(0);
+                $(current_instance.table).closest('.table_wrapper').addClass('loading');
             });
 
             $(this.table).find('table').on('Pagination_remove_loading', function(){
-                $(current_instance.table).find('tbody').removeClass('loading');
+                $(current_instance.table).closest('.table_wrapper').removeClass('loading');
             });
 
             // Button export
@@ -158,7 +157,7 @@
 
             /** gestion des order by down actif au chargement de la page */
             $(this.table).closest('.container_table').find('.show_filter').click(function(){
-                $(current_instance.table).find('.filter_header .slideme').slideToggle();
+                $(current_instance.table).find('.slideme').slideToggle();
                 $(this).toggleClass('active');
             });
 
@@ -303,13 +302,16 @@
 
             // remove error message si present
             $(this.table).find('.error_msg').closest('tr').remove();
+            $(this.table).closest('.table_wrapper').find('.error_msg').hide();
+            $(this.table).closest('.table_wrapper').removeClass('hide_scroll');
 
             if(this.xhr){
                 this.xhr.abort();
             }
 
-            $(this.table).find('tbody').scrollTop(0);
-            $(this.table).find('tbody').addClass('loading');
+            $(this.table).closest('.table_wrapper').scrollTop(0);
+            $(this.table).closest('.table_wrapper').scrollLeft(0);
+            $(this.table).closest('.table_wrapper').addClass('loading');
 
             const data = this.getFiltreForPost(); // filtre envoyé sous forme de post
             data['page_curr']  = (force_page_curr!== undefined) ? force_page_curr : $(this.page_curr).val();
@@ -334,7 +336,7 @@
 
                 $(current_instance.page_curr).val(response.page_curr)
                 current_instance.update(response);
-                $(current_instance.table).find('tbody').removeClass('loading');
+                $(current_instance.table).closest('.table_wrapper').removeClass('loading');
 
             });
 

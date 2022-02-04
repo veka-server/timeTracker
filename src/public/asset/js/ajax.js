@@ -5,7 +5,9 @@
     $.fn.postForTableau = function(url, data, callback) {
 
         let table = $(this);
-        $(table).find('tbody').addClass('loading');
+        $(table).closest('.table_wrapper').scrollTop(0);
+        $(table).closest('.table_wrapper').scrollLeft(0);
+        $(table).closest('.table_wrapper').addClass('loading');
 
         return $.post( url, data, function( response ) {
 
@@ -24,7 +26,7 @@
             event.id = $(table).attr('id');
             $(table).trigger( event );
 
-            $(table).find('tbody').removeClass('loading');
+            $(table).closest('.table_wrapper').removeClass('loading');
         });
 
     };

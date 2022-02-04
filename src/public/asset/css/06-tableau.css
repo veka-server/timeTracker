@@ -10,18 +10,33 @@
     border-radius: 5px;
 }
 
-table{border:1px solid rgba(0,0,0,0.20);border-collapse:collapse;margin:0;padding:0;width:100%;table-layout:fixed;}
+table{margin:0;padding:0;width:100%;display: block; border-collapse:separate ; border-spacing:0}
 table caption{font-size:1.5em;margin:.5em 0 .75em}
 table tr{background-color:white;border:1px solid rgba(0,0,0,0.15);padding:.35em}
 table tr td, table tr th {border:1px solid rgba(0,0,0,0.15);padding:0.7em}
 table tr.title, table tr.title th {border-bottom:none}
 table tr.filter_header, table tr.filter_header th {border-top:none}
 table th,table td{padding:1em}
-table th{background: #e0e0e0;color:rgba(0,0,0,0.7);font-size:.85em;letter-spacing:.1em;text-transform:uppercase}
+table th{background: #e0e0e0;color:rgba(0,0,0,0.7);font-size:.85em;letter-spacing:.1em;text-transform:uppercase;
+    position: sticky;
+    top: 0; /* Don't forget this, required for the stickiness */
+}
 table tbody{min-height:50px;height: 50px;width: 100%;}
 table tbody tr:nth-child(odd) td{background:rgba(0,0,0,0.03)}
 table tbody tr:hover td:not(.error_msg) , table tbody tr:nth-child(odd):hover td:not(.error_msg){background: rgba(106, 125, 182, 0.15)}
-table tbody tr td.error_msg{background:rgba(0,0,0,0.35);color:white;height: 300px;}
+
+.table_wrapper{
+    width: 100%;
+    max-height:500px;
+    overflow-x: scroll;
+    position: relative;
+}
+
+.table_wrapper.hide_scroll{
+    overflow:hidden;
+    min-height: 250px;
+}
+.table_wrapper .error_msg{position:absolute; top:0;width:100%;background:rgba(0,0,0,0.35);color:white;min-height: 300px;height:100%;text-align: center;padding-top:75px}
 
 table thead .filter_header {padding: 0}
 table thead .filter_header th {padding: 0}
@@ -37,19 +52,18 @@ table thead .filter_header th .slideme {padding: 8.5px}
 }
 
 /* loader */
-table tbody.loading{position:relative;overflow: hidden}
-table tbody.loading > tr.origin_tr > td{height:300px;}
-table tbody.loading::before{content:'';display:inline-block;width:100%;height:100%;position:absolute;top:0;left:0;background:rgba(0,0,0,0.35);z-index:9}
-table tbody.loading::after{font-family:"Font Awesome 5 Free";content:"\f021";font-weight: 900;display:inline-block;width:40px;height:40px;position:absolute;top:calc(50% - 20px);left:calc(50% - 20px);color:#fff;z-index:10;-webkit-animation:spin 2s infinite linear;animation:spin 2s infinite linear;text-align:center;font-size:40px;line-height:40px}
+.table_wrapper.loading{position:relative;overflow: hidden;min-height: 250px;text-align: center}
+.table_wrapper.loading::before{content:'';display:inline-block;width:100%;height:100%;position:absolute;top:0;left:0;background:rgba(0,0,0,0.35);z-index:9}
+.table_wrapper.loading::after{font-family:"Font Awesome 5 Free";content:"\f021";font-weight: 900;display:inline-block;width:40px;height:40px;position:absolute;top:calc(50% - 20px);left:calc(50% - 20px);color:#fff;z-index:10;-webkit-animation:spin 2s infinite linear;animation:spin 2s infinite linear;text-align:center;font-size:40px;line-height:40px}
 
-tfoot.footer{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
-tfoot.footer > tr{text-align:left;background: rgba(0,0,0,0.06);}
-tfoot.footer > tr td{text-align:left}
-tfoot.footer .pagination_btn{text-align:right;display:inline-block;width:calc(100% - 205px)}
-tfoot.footer .page_size_container{display:inline-block;width:200px;}
-tfoot.footer .pagination_btn a{cursor:pointer;border:1px solid rgba(0,0,0,0.3);border-radius:3px;width:30px;display:inline-block;text-align:center;font-size:20px;padding:4px;box-sizing:border-box;vertical-align:middle;color:rgba(0,0,0,0.7);background:#fff}
-tfoot.footer .pagination_btn a:hover{background:rgba(255,255,255,0.8)}
-tfoot.footer .pagination_btn input{border:1px solid rgba(0,0,0,0.3);border-radius:3px;width:60px;display:inline-block;text-align:center;height:30px;line-height:30px;box-sizing:border-box;vertical-align:middle}
+.table_footer{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background: #e0e0e0;border:1px solid rgba(0,0,0,0.1);padding:0.7em;}
+.table_footer > tr{text-align:left;background: rgba(0,0,0,0.06);}
+.table_footer > tr td{text-align:left}
+.table_footer .pagination_btn{text-align:right;display:inline-block;width:calc(100% - 205px)}
+.table_footer .page_size_container{display:inline-block;width:200px;}
+.table_footer .pagination_btn a{cursor:pointer;border:1px solid rgba(0,0,0,0.3);border-radius:3px;width:30px;display:inline-block;text-align:center;font-size:20px;padding:4px;box-sizing:border-box;vertical-align:middle;color:rgba(0,0,0,0.7);background:#fff}
+.table_footer .pagination_btn a:hover{background:rgba(255,255,255,0.8)}
+.table_footer .pagination_btn input{border:1px solid rgba(0,0,0,0.3);border-radius:3px;width:60px;display:inline-block;text-align:center;height:30px;line-height:30px;box-sizing:border-box;vertical-align:middle}
 
 .field_order_by{cursor:pointer}
 .field_order_by::after{font-family:'Font Awesome 5 Free';padding-left:5px;content:"\f0dc";cursor:pointer}

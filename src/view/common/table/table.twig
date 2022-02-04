@@ -3,40 +3,55 @@
     <div class="new_row button vert"><i class="fas fa-plus"></i> {{ "new_row" | lang }}</div>
     <div class="export_csv button bleu"><i class="fas fa-download"></i> {{ "export" | lang }}</div>
     <div class="show_filter button blanc" style="display: none;"><i class="fas fa-filter"></i> {{ "show_filtre" | lang }}</div>
-    <table id="{{ uniqid }}" class="table_with_pagination">
-        <thead>
-        <tr class="title">
-            {% for column in columns %}
-                <th scope="col" >
-                    <span class="{% if column.sort == true %}field_order_by{% endif %}" data-sort="{{ column.key }}">{{ column.label }}</span>
-                </th>
-            {% endfor %}
-        </tr>
-        <tr class="filter_header">
-            {% for column in columns %}
-                <th>
-                    {% if column.filter == true %}
-                    <div class="slideme hidden" >
-                        <input type="text" class="filtre_colonne" name="{{ column.key }}" placeholder="{{ column.label }}" />
-                    </div>
-                    {% endif %}
-                </th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody data-liste-url="{{ urlListe }}">
-        <tr class="origin_tr">
-            <td colspan="{{ columns|length }}"></td>
-        </tr>
-        </tbody>
-        {{ include('common/table/footer.twig') }}
-    </table>
+    <div class="table_wrapper">
+        <table id="{{ uniqid }}" class="table_with_pagination">
+            <thead>
+            <tr class="title">
+                {% for column in columns %}
+                    <th scope="col" >
+                        <span class="{% if column.sort == true %}field_order_by{% endif %}" data-sort="{{ column.key }}">{{ column.label }}</span>
+                        <div class="slideme hidden" >
+                            <input type="text" class="filtre_colonne" name="{{ column.key }}" placeholder="{{ column.label }}" />
+                        </div>
+                    </th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody data-liste-url="{{ urlListe }}">
+            <tr class="origin_tr">
+                <td colspan="{{ columns|length }}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="error_msg hidden">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3em;"></i><br/><br/><span class="msg_error"></span><br/><br/>
+            <span class="button grey_inside_table refresh_tableau">{{ "tableau_msg_clic_refresh" | lang }}</span>
+        </div>
+    </div>
+    <div class="table_footer pagination unselectable">
+        <div class="page_size_container">
+            <select name="page_size" class="page_size">
+                <option value="10" selected="selected">10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+            </select>
+            <label for="page_size">{{ "nb_ligne_afficher" | lang }}</label>
+        </div>
+        <div class="pagination_btn">
+            <a class="clickable envoi_first"><i class="fas fa-angle-double-left"></i></a>
+            <a class="clickable envoi_previous"><i class="fas fa-angle-left"></i></a>
+            <span class="text"><input type="number" name="page_curr" class="page_curr" value="1" min="1" /><span class="page_nb"></span></span>
+            <a class="clickable envoi_next"><i class="fas fa-angle-right"></i></a>
+            <a class="clickable envoi_last"><i class="fas fa-angle-double-right"></i></a>
+        </div>
+
+    </div>
 </div>
 <script>
 $(window).load(function() {
     new Pagination(
         $("#{{ uniqid }}")
-        ,'{{ "tableau_msg_clic_refresh" | lang | escape('js') }}'
     );
 });
 </script>

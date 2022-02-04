@@ -5,7 +5,21 @@ class Utilisateur extends Model
 {
 
     public static function getAll(){
-        $sql = 'SELECT * FROM utilisateurs';
+        $sql = 'SELECT *,
+654654 as date_creation1,
+654654 as date_creation2,
+654654 as date_creation3,
+654654 as date_creation4,
+654654 as date_creation5,
+654654 as date_creation6,
+654654 as date_creation7,
+654654 as date_creation8,
+654654 as date_creation9,
+654654 as date_creation10,
+654654 as date_creation11,
+654654 as date_creation12
+
+FROM utilisateurs';
         return self::exec_pagination($sql);
     }
 
