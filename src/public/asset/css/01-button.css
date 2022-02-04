@@ -30,3 +30,6 @@
 
 .button.orange { background:#f29e37;}
 .button.orange:hover { background: #d28931;}
+
+.button.blanc { background:white;color:rgba(0,0,0,0.7)}
+.button.blanc:hover { background: #dadada;}

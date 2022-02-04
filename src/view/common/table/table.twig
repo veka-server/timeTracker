@@ -1,9 +1,11 @@
 {% set uniqid = "tableau_id_" ~ "now"|date("Ymdhisu") ~ random(1, 9999999999999) %}
 <div class="container_table">
-    <div class="show_filter button bleu" style="display: none;"><i class="fas fa-filter"></i> {{ "show_filtre" | lang }}</div>
+    <div class="new_row button vert"><i class="fas fa-plus"></i> {{ "new_row" | lang }}</div>
+    <div class="export_csv button bleu"><i class="fas fa-download"></i> {{ "export" | lang }}</div>
+    <div class="show_filter button blanc" style="display: none;"><i class="fas fa-filter"></i> {{ "show_filtre" | lang }}</div>
     <table id="{{ uniqid }}" class="table_with_pagination">
         <thead>
-        <tr>
+        <tr class="title">
             {% for column in columns %}
                 <th scope="col" >
                     <span class="{% if column.sort == true %}field_order_by{% endif %}" data-sort="{{ column.key }}">{{ column.label }}</span>
@@ -15,7 +17,7 @@
                 <th>
                     {% if column.filter == true %}
                     <div class="slideme hidden" >
-                        <input type="text" class="filtre_colonne" name="{{ column.key }}" />
+                        <input type="text" class="filtre_colonne" name="{{ column.key }}" placeholder="{{ column.label }}" />
                     </div>
                     {% endif %}
                 </th>
