@@ -11,6 +11,7 @@ class Tableau extends Controller
     private $datas = [];
     private $urlListe = null;
     private $cleaned_data = [];
+    private $full_width = false;
 
     public function addColumn(array $array)
     {
@@ -23,6 +24,7 @@ class Tableau extends Controller
         return $this->getView('common/table/table.twig',[
             'columns' => $this->columns
             ,'urlListe' => $this->urlListe
+            ,'full_width' => $this->full_width
         ]);
     }
 
@@ -71,5 +73,12 @@ class Tableau extends Controller
         return json_encode( array_merge($retour, Model::getPaginationData()));
     }
 
+    /**
+     * @param bool $full_width
+     */
+    public function setFullWidth(bool $full_width): void
+    {
+        $this->full_width = $full_width;
+    }
 
 }

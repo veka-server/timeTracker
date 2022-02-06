@@ -1,5 +1,5 @@
 {% set uniqid = "tableau_id_" ~ "now"|date("Ymdhisu") ~ random(1, 9999999999999) %}
-<div class="container_table">
+<div class="container_table {% if full_width == true %}full_width{% endif %}">
     <div class="new_row button vert"><i class="fas fa-plus"></i> {{ "new_row" | lang }}</div>
     <div class="export_csv button bleu"><i class="fas fa-download"></i> {{ "export" | lang }}</div>
     <div class="show_filter button blanc" style="display: none;"><i class="fas fa-filter"></i> {{ "show_filtre" | lang }}</div>
