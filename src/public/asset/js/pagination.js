@@ -122,7 +122,7 @@
 
                     const elem = $(this);
 
-                    const remove_list = $(this.table).find('.field_order_by:not([data-sort="' + $(elem).attr('data-sort') + '"])');
+                    const remove_list = $(current_instance.table).find('.field_order_by:not([data-sort="' + $(elem).attr('data-sort') + '"])');
                     remove_list.removeClass('down');
                     remove_list.removeClass('up');
 
