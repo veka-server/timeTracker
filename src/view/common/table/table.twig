@@ -10,11 +10,16 @@
                 {% for column in columns %}
                     <th scope="col" >
                         <span class="{% if column.sort == true %}field_order_by{% endif %}" data-sort="{{ column.key }}">{{ column.label }}</span>
-                        <div class="slideme hidden" >
-                            <input type="text" class="filtre_colonne" name="{{ column.key }}" placeholder="{{ column.label }}" />
-                        </div>
+                        {% if column.filter == true %}
+                            <div class="filtre_extend hidden" >
+                                <input type="text" class="filtre_colonne" name="{{ column.key }}" placeholder="{{ column.label }}" />
+                            </div>
+                        {% endif %}
                     </th>
                 {% endfor %}
+                <th scope="col" class="action_column" >
+                    <span>{{ "action_column" | lang }}</span>
+                </th>
             </tr>
             </thead>
             <tbody data-liste-url="{{ urlListe }}">

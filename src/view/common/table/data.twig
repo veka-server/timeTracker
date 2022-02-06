@@ -3,5 +3,9 @@
     {% for key,value in ligne %}
             <td data-label="{{ key }}">{{ value }}</td>
     {% endfor %}
+        <td class="action_column">
+            <span class="button small bleu" ><i class="far fa-edit"></i> Éditer</span>
+            <span class="button small rouge" ><i class="far fa-trash-alt"></i> Supprimer</span>
+        </td>
     </tr>
 {% endfor %}

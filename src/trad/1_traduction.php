@@ -95,8 +95,11 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
         Lang::set('menu.administration', 'FR', 'administration');
         Lang::set('menu.administration', 'EN', 'administration');
 
-        Lang::set('menu.navigation', 'FR', 'Navigation');
-        Lang::set('menu.navigation', 'EN', 'Navigation');
+        Lang::set('menu.navigation', 'FR', 'navigation');
+        Lang::set('menu.navigation', 'EN', 'navigation');
+
+        Lang::set('action_column', 'FR', 'actions');
+        Lang::set('action_column', 'EN', 'actions');
     }
 
     /**

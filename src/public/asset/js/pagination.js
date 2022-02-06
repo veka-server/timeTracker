@@ -25,7 +25,7 @@
 
             const current_instance = this;
 
-            if($(this.table).find('.slideme').length > 0){
+            if($(this.table).find('.filtre_extend').length > 0){
                 $(this.table).closest('.container_table').find('.show_filter').show();
             }
 
@@ -155,9 +155,9 @@
                 this.order_by = $(this).attr('data-sort')+'-desc';
             });
 
-            /** gestion des order by down actif au chargement de la page */
+            /** gestion du clic sur le bouton des filtres */
             $(this.table).closest('.container_table').find('.show_filter').click(function(){
-                $(current_instance.table).find('.slideme').slideToggle();
+                $(current_instance.table).find('.filtre_extend').slideToggle();
                 $(this).toggleClass('active');
             });
 
@@ -196,6 +196,12 @@
          * show / hide nombre max de page
          */
         update(response){
+
+            /** resize auto de la colonne action */
+            $(this.table).find('td.action_column').css('display','inline-block');
+            let width_content_column_action = $(this.table).find('td.action_column').outerWidth();
+            $(this.table).find('td.action_column').css('display','table-cell');
+            $(this.table).find('.action_column').css('width',width_content_column_action+'px');
 
             /*
             if(response.no_nb_page === undefined || response.no_nb_page != true){

@@ -12,6 +12,10 @@
     background: rgba(0,0,0,0.7);
     color:white;
 }
+.button.small {
+    padding: 5px;
+    font-size: 0.75em;
+}
 .button.bleu:hover { background: rgb(122, 122, 122);}
 
 .button + .button {margin-left:10px;}

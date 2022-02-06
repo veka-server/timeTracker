@@ -23,8 +23,8 @@ class Utilisateur extends Controller
         $this->tableau->setUrlListe('/utilisateur/liste'); /* url de la requete ajax des recuperation des données */
         $this->tableau->addColumn(['label' => Lang::get('nom'),'key' => 'nom', 'sort' => true, 'filter' => true]);
         $this->tableau->addColumn(['label' => Lang::get('prenom'),'key' => 'prenom', 'sort' => true, 'filter' => true]);
-        $this->tableau->addColumn(['label' => Lang::get('email'),'key' => 'email', 'sort' => true, 'filter' => true]);
-        $this->tableau->addColumn(['label' => Lang::get('date_creation'),'key' => 'date_creation', 'sort' => true, 'filter' => true]);
+        $this->tableau->addColumn(['label' => Lang::get('email'),'key' => 'email', 'sort' => true]);
+        $this->tableau->addColumn(['label' => Lang::get('date_creation'),'key' => 'date_creation', 'sort' => true]);
 
         return $this->tableau;
     }

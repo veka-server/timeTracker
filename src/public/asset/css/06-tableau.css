@@ -9,6 +9,7 @@ table{margin:0;padding:0;width:100%;display:block;border-collapse:separate;borde
 table caption{font-size:1.5em;margin:.5em 0 .75em}
 table tr{background-color:#fff;border:1px solid rgba(0,0,0,0.15);padding:.35em}
 table tr td,table tr th{border:1px solid rgba(0,0,0,0.15);padding:.7em}
+table tr td.action_column,table tr th.action_column{padding:.3em;White-space: nowrap;}
 table tr.title,table tr.title th{border-bottom:none}
 table tr.filter_header,table tr.filter_header th{border-top:none}
 table th,table td{padding:1em}
@@ -21,7 +22,7 @@ table tbody tr:hover td:not(.error_msg),table tbody tr:nth-child(odd):hover td:n
 .table_wrapper .error_msg{position:absolute;top:0;width:100%;background:rgba(0,0,0,0.35);color:#fff;min-height:300px;height:100%;text-align:center;padding-top:75px}
 table thead .filter_header{padding:0}
 table thead .filter_header th{padding:0}
-table thead .filter_header th .slideme{padding:8.5px}
+table thead .filter_header th .filtre_extend{padding:8.5px}
 .table_footer{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background:#e0e0e0;border:1px solid rgba(0,0,0,0.1);padding:.7em}
 .table_footer > tr{text-align:left;background:rgba(0,0,0,0.06)}
 .table_footer > tr td{text-align:left}
