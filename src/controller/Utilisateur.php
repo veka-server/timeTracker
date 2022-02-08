@@ -20,11 +20,35 @@ class Utilisateur extends Controller
 
         $this->tableau = new Tableau();
         $this->tableau->setFullWidth(true); /* le tableau doit-il prendre toute la largeur disponible ? */
-        $this->tableau->setUrlListe('/utilisateur/liste'); /* url de la requete ajax des recuperation des données */
+
+        /** definition des actions global */
+        $this->tableau->setUrlListe('/utilisateur/liste'); /* obligatoire */
+        $this->tableau->setUrlExport('/utilisateur/export');
+        $this->tableau->setUrlNewRow('/utilisateur/add');
+
+        /** definition des colonnes */
         $this->tableau->addColumn(['label' => Lang::get('nom'),'key' => 'nom', 'sort' => true, 'filter' => true]);
         $this->tableau->addColumn(['label' => Lang::get('prenom'),'key' => 'prenom', 'sort' => true, 'filter' => true]);
         $this->tableau->addColumn(['label' => Lang::get('email'),'key' => 'email', 'sort' => true]);
         $this->tableau->addColumn(['label' => Lang::get('date_creation'),'key' => 'date_creation', 'sort' => true]);
+
+        /** ajout du bouton d'édition */
+        $this->tableau->addAction([
+            'url' => '/utilisateur/edit'
+            , 'label' => Lang::get('editer')
+            , 'confirmation_msg' => null /* si besoin d'une popin de confirmation */
+            , 'icone' => '<i class="far fa-edit"></i>' /* html de l'icone */
+            , 'couleur' => 'bleu' /* voir css */
+        ]);
+
+        /** ajout du bouton de suppression */
+        $this->tableau->addAction([
+            'url' => '/utilisateur/delete'
+            , 'label' => Lang::get('supprimer')
+            , 'confirmation_msg' => Lang::get('confirmation_suppression_utilisateur') /* si besoin d'une popin de confirmation */
+            , 'icone' => '<i class="far fa-trash-alt"></i>' /* html de l'icone */
+            , 'couleur' => 'rouge' /* voir css */
+        ]);
 
         return $this->tableau;
     }

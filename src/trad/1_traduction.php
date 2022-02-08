@@ -100,6 +100,15 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
 
         Lang::set('action_column', 'FR', 'actions');
         Lang::set('action_column', 'EN', 'actions');
+
+        Lang::set('editer', 'FR', 'éditer');
+        Lang::set('editer', 'EN', 'edit');
+
+        Lang::set('supprimer', 'FR', 'supprimer');
+        Lang::set('supprimer', 'EN', 'delete');
+
+        Lang::set('confirmation_suppression_utilisateur', 'FR', 'Souhaitez-vous vraiment supprimer cet utilisateur ?');
+        Lang::set('confirmation_suppression_utilisateur', 'EN', 'Delete this user ?');
     }
 
     /**

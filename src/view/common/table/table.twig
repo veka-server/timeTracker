@@ -1,7 +1,14 @@
 {% set uniqid = "tableau_id_" ~ "now"|date("Ymdhisu") ~ random(1, 9999999999999) %}
 <div class="container_table {% if full_width == true %}full_width{% endif %}">
-    <div class="new_row button vert"><i class="fas fa-plus"></i> {{ "new_row" | lang }}</div>
-    <div class="export_csv button bleu"><i class="fas fa-download"></i> {{ "export" | lang }}</div>
+
+    {% if urlNewRow is defined and urlNewRow is not null %}
+        <div class="new_row button vert" data-url="{{ urlNewRow }}"><i class="fas fa-plus"></i> {{ "new_row" | lang }}</div>
+    {% endif %}
+
+    {% if urlExport is defined and urlExport is not null %}
+        <div class="export button bleu" data-url="{{ urlExport }}"><i class="fas fa-download"></i> {{ "export" | lang }}</div>
+    {% endif %}
+
     <div class="show_filter button blanc" style="display: none;"><i class="fas fa-filter"></i> {{ "show_filtre" | lang }}</div>
     <div class="table_wrapper">
         <table id="{{ uniqid }}" class="table_with_pagination">

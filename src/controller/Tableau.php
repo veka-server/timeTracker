@@ -9,7 +9,10 @@ class Tableau extends Controller
 
     private $columns = [];
     private $datas = [];
+    private $actions = [];
     private $urlListe = null;
+    private $urlExport = null;
+    private $urlNewRow = null;
     private $cleaned_data = [];
     private $full_width = false;
 
@@ -24,6 +27,8 @@ class Tableau extends Controller
         return $this->getView('common/table/table.twig',[
             'columns' => $this->columns
             ,'urlListe' => $this->urlListe
+            ,'urlExport' => $this->urlExport
+            ,'urlNewRow' => $this->urlNewRow
             ,'full_width' => $this->full_width
         ]);
     }
@@ -53,6 +58,7 @@ class Tableau extends Controller
         return $this->getView('common/table/data.twig',[
             'cleaned_data' => $this->cleaned_data
             ,'data' => $this->cleaned_data
+            ,'actions' => $this->actions
         ]);
     }
 
@@ -79,6 +85,43 @@ class Tableau extends Controller
     public function setFullWidth(bool $full_width): void
     {
         $this->full_width = $full_width;
+    }
+
+    public function addAction(array $array)
+    {
+        $this->actions[] = $array;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUrlExport()
+    {
+        return $this->urlExport;
+    }
+
+    /**
+     * @param string $urlExport
+     */
+    public function setUrlExport(string $urlExport): void
+    {
+        $this->urlExport = $urlExport;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUrlNewRow()
+    {
+        return $this->urlNewRow;
+    }
+
+    /**
+     * @param string $urlNewRow
+     */
+    public function setUrlNewRow(string $urlNewRow): void
+    {
+        $this->urlNewRow = $urlNewRow;
     }
 
 }
