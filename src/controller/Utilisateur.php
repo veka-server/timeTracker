@@ -95,6 +95,8 @@ class Utilisateur extends Controller
             /** recupere les données sans pagination */
             $utilisateurs = \App\model\Utilisateur::getAll();
 
+            sleep(5);
+
             $csv = new \App\classe\CSV();
             $header = [
                 'id_utilisateur' => Lang::get('export::column::id_utilisateur'),

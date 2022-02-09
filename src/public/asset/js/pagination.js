@@ -108,6 +108,10 @@
             // Button export
             this.export_btn_with_pagination.click(function(){
 
+                if($(this).attr('disabled') !== undefined){
+                    return ;
+                }
+
                 let url = 'export';
                 if($(this).attr('data-url') !== undefined){
                     url = $(this).attr('data-url');

@@ -55,7 +55,7 @@
 
         }, 'json').always(function() {
             $(button).removeAttr('disabled');
-            $(button).removeClass('button_download_loading');
+            $(button).removeClass('button_loading');
         });
 
     };
