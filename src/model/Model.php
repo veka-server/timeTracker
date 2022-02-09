@@ -36,6 +36,11 @@ class Model extends \VekaServer\Framework\Model
 
         $clean_sql = self::addFiltre($clean_sql, $param_sql);
 
+        if( (bool)($_REQUEST['export'] ?? false) === true){
+            $clean_sql = self::getSQL($sql, $param_sql);
+            return self::exec($clean_sql,$param_sql);
+        }
+
         if($_REQUEST['page_curr'] != 'last'){
             self::$paginationData['page_curr'] = (int) ($_REQUEST['page_curr'] ?? 1);
         } else {
@@ -105,7 +110,10 @@ class Model extends \VekaServer\Framework\Model
 
         $clean_sql = self::addFiltre($clean_sql, $param_sql);
         $clean_sql .= self::getOrderBySQL();
-        $clean_sql .= self::getLimitSQL();
+
+        if( (bool)($_REQUEST['export'] ?? false) === false){
+            $clean_sql .= self::getLimitSQL();
+        }
 
         return $clean_sql;
     }

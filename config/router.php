@@ -18,6 +18,7 @@ return (new \VekaServer\Rooter\Rooter())
     // Page de gestion des utilisateurs
     ->get('/utilisateur',function(){echo (new \App\controller\Utilisateur())->liste();})
     ->post('/utilisateur/liste',function(){echo (new \App\controller\Utilisateur())->ajax_liste();})
+    ->post('/utilisateur/export',function(){echo (new \App\controller\Utilisateur())->ajax_export();})
 
     // Page dashboard
     ->get('/',function(){

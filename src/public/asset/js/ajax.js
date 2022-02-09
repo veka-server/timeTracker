@@ -30,4 +30,33 @@
         });
 
     };
+
+    $.fn.postForExport = function(url, data) {
+
+        let button = $(this);
+        $(button).attr('disabled','disabled');
+        $(button).addClass('button_loading');
+
+        return $.post( url, data, function( response ) {
+
+            if(response.success === false){
+                /** @todo show error with popin */
+                console.log('error export')
+                return ;
+            }
+
+            let element = document.createElement('a');
+            element.setAttribute('href', response.header + encodeURIComponent(response.text));
+            element.setAttribute('download', response.filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+
+        }, 'json').always(function() {
+            $(button).removeAttr('disabled');
+            $(button).removeClass('button_download_loading');
+        });
+
+    };
 }( jQuery ));

@@ -3,6 +3,7 @@ namespace App\controller;
 
 use App\exception\TableauException;
 use App\model\Model;
+use VekaServer\Framework\Log;
 
 class Tableau extends Controller
 {
@@ -62,7 +63,7 @@ class Tableau extends Controller
         ]);
     }
 
-    public function setFonctionData(\Closure $callback)
+    public function setFonctionData(\Closure $callback, $addPagination = true)
     {
         $retour = [];
         try{
@@ -72,11 +73,14 @@ class Tableau extends Controller
             $retour['success'] = false;
             $retour['error_msg'] = $e->getMessage();
         }catch (\Exception $e){
+            Log::error($e);
             $retour['success'] = false;
             $retour['error_msg'] = 'Une erreur s\'est produite';
         }
 
-        return json_encode( array_merge($retour, Model::getPaginationData()));
+        $pagination = ($addPagination === true) ?  Model::getPaginationData() : [];
+
+        return json_encode( array_merge($retour, $pagination));
     }
 
     /**

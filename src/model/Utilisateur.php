@@ -5,7 +5,15 @@ class Utilisateur extends Model
 {
 
     public static function getAll(){
-        $sql = 'SELECT * FROM utilisateurs';
+        $sql = 'SELECT id_utilisateur,
+                    nom,
+                    prenom,
+                    telephone,
+                    email,
+                    date_creation,
+                    disable,
+                    lang,
+                    timezone FROM utilisateurs';
         return self::exec_pagination($sql);
     }
 

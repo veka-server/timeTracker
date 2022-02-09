@@ -86,4 +86,35 @@ class Utilisateur extends Controller
         });
     }
 
+    /** retourne le json a l'ajax de recuperation de l'export */
+    public function ajax_export()
+    {
+        /** Algo de recuperation des données pour le tableau */
+        return $this->getTableau()->setFonctionData(function($arrayForJson){
+
+            /** recupere les données sans pagination */
+            $utilisateurs = \App\model\Utilisateur::getAll();
+
+            $csv = new \App\classe\CSV();
+            $header = [
+                'id_utilisateur' => Lang::get('export::column::id_utilisateur'),
+                'nom' => Lang::get('export::column::nom'),
+                'prenom' => Lang::get('export::column::prenom'),
+                'telephone' => Lang::get('export::column::telephone'),
+                'email' => Lang::get('export::column::email'),
+                'date_creation' => Lang::get('export::column::date_creation'),
+                'disable' => Lang::get('export::column::disable'),
+                'lang' => Lang::get('export::column::lang'),
+                'timezone' => Lang::get('export::column::timezone')
+            ];
+
+            /** generation du code html du tableau */
+            $arrayForJson['header'] = $csv::HEADER;
+            $arrayForJson['text'] =  $csv->arrayToContent($utilisateurs, $header);
+            $arrayForJson['filename'] = 'export_utilisateur.csv';
+
+            return $arrayForJson;
+        }, false);
+    }
+
 }

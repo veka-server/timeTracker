@@ -5,6 +5,7 @@
             this.table = table;
 
             this.xhr;
+            this.xhr_export;
 
             this.order_by = null;
 
@@ -18,7 +19,7 @@
             this.page_nb = $(this.pagination).find('.page_nb');
             this.page_size = $(this.pagination).find('.page_size');
             this.request_time = $(this.pagination).find('.request_time');
-            this.export_btn_with_pagination = $(this.table).find('.export_btn_with_pagination');
+            this.export_btn_with_pagination = $(this.table).closest('.container_table').find('.btn_export');
             this.field_order_by = $(this.table).find('.field_order_by');
 
             this.old_filtre = '';
@@ -350,13 +351,19 @@
 
         export(url){
 
+            if(this.xhr_export){
+                this.xhr_export.abort();
+            }
+
             const data = this.getFiltreForPost(); // filtre envoyé sous forme de post
             data['filtre']    = this.getFiltre(); // filtre envoyé dans le $_POST['filtre'], cela correspond aux filtres du header
             data['export']    = true;
 
             try {
-                new Download(url, data, this.export_btn_with_pagination)
-            }catch(e){ }
+                this.xhr_export = $(this.export_btn_with_pagination).postForExport( url, data);
+            }catch(e){
+                console.error(e)
+            }
         }
 
     }
