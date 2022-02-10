@@ -19,7 +19,7 @@ table tbody tr:nth-child(odd) td{background:rgba(0,0,0,0.03)}
 table tbody tr:hover td:not(.error_msg),table tbody tr:nth-child(odd):hover td:not(.error_msg){background:rgba(106,125,182,0.15)}
 .table_wrapper{width:100%;max-height:500px;overflow-x:auto;position:relative}
 .table_wrapper.hide_scroll{overflow:hidden;min-height:250px}
-.table_wrapper .error_msg{position:absolute;top:0;width:100%;background:rgba(0,0,0,0.35);color:#fff;min-height:300px;height:100%;text-align:center;padding-top:75px}
+.table_wrapper .error_msg{position:absolute;top:0;width:100%;background:rgba(0,0,0,0.75);color:#fff;min-height:300px;height:100%;text-align:center;padding-top:75px}
 table thead th .filtre_extend{padding:8.5px;margin-top:0.7em;}
 .table_footer{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background:#e0e0e0;border:1px solid rgba(0,0,0,0.1);padding:.7em}
 .table_footer > tr{text-align:left;background:rgba(0,0,0,0.06)}

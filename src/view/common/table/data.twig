@@ -5,7 +5,11 @@
     {% endfor %}
         <td class="action_column">
         {% for action in actions %}
-            <span class="button small {{ action.couleur }}" >{{ action.icone | raw }} {{ action.label }}</span>
+            <span class="tableau_action_button button small {{ action.couleur }}"
+                  data-url="{{ action.url }}"
+                  data-confirmation_msg="{{ action.confirmation_msg }}" >
+                {{ action.icone | raw }} {{ action.label }}
+            </span>
         {% endfor %}
         </td>
     </tr>

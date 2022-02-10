@@ -1,7 +1,9 @@
 <?php
 namespace App\controller;
 
+use App\exception\TableauException;
 use VekaServer\Framework\Lang;
+use VekaServer\Framework\Log;
 
 class Utilisateur extends Controller
 {
@@ -95,8 +97,6 @@ class Utilisateur extends Controller
             /** recupere les données sans pagination */
             $utilisateurs = \App\model\Utilisateur::getAll();
 
-            sleep(5);
-
             $csv = new \App\classe\CSV();
             $header = [
                 'id_utilisateur' => Lang::get('export::column::id_utilisateur'),
@@ -114,6 +114,26 @@ class Utilisateur extends Controller
             $arrayForJson['header'] = $csv::HEADER;
             $arrayForJson['text'] =  $csv->arrayToContent($utilisateurs, $header);
             $arrayForJson['filename'] = 'export_utilisateur.csv';
+
+            return $arrayForJson;
+        }, false);
+    }
+
+    /** retourne le json a l'ajax de recuperation de la suppression */
+    public function ajax_delete()
+    {
+        /** Algo de recuperation des données pour le tableau */
+        return $this->getTableau()->setFonctionData(function($arrayForJson){
+
+            $validation = new \App\model\Validation($_POST);
+            $validation->addField('id_utilisateur', ['type' => 'numeric', 'required' => true]);
+
+            if($validation->numeric('id_utilisateur')){
+                throw new TableauException(Lang::get('validation::id_utilisateur'));
+            }
+
+            /** recupere les données sans pagination */
+//            \App\model\Utilisateur::delete($validation->get['id_utilisateur']);
 
             return $arrayForJson;
         }, false);

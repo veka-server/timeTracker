@@ -20,7 +20,15 @@
 
             callback(response)
 
-        }, 'json').always(function() {
+        }, 'json').fail(function(response) {
+
+            /** @todo show error with popin */
+
+            const event = $.Event("Tableau::show_error_inside_tableau");
+            event.msg = 'Error '+response.status+' : '+response.statusText;
+            $(table).trigger( event );
+
+        }).always(function() {
 
             const event = $.Event("Tableau::complete");
             event.id = $(table).attr('id');
@@ -53,7 +61,11 @@
             element.click();
             document.body.removeChild(element);
 
-        }, 'json').always(function() {
+        }, 'json').fail(function(response) {
+
+            /** @todo show error with popin */
+
+        }).always(function() {
             $(button).removeAttr('disabled');
             $(button).removeClass('button_loading');
         });

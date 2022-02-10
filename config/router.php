@@ -19,6 +19,7 @@ return (new \VekaServer\Rooter\Rooter())
     ->get('/utilisateur',function(){echo (new \App\controller\Utilisateur())->liste();})
     ->post('/utilisateur/liste',function(){echo (new \App\controller\Utilisateur())->ajax_liste();})
     ->post('/utilisateur/export',function(){echo (new \App\controller\Utilisateur())->ajax_export();})
+    ->post('/utilisateur/delete',function(){echo (new \App\controller\Utilisateur())->ajax_delete();})
 
     // Page dashboard
     ->get('/',function(){
@@ -27,7 +28,10 @@ return (new \VekaServer\Rooter\Rooter())
         echo (new \App\controller\Dashboard())->show_page();
     })
 
+    // page de gestion des erreurs Javascript
+    ->post('/error_js_caught',function(){(new \App\controller\JsErrorHandler())->catchJsError();})
+
     /** Page d'erreur 500 @todo creer une page static serait plus judicieux */
-    ->get('/500',function(){ echo 'Eroor 500 : custom page'; })
+    ->get('/500',function(){ echo 'Error 500 : custom page'; })
 
 ;

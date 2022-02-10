@@ -74,7 +74,7 @@
                 }, 500);
             });
 
-            $(this.table).find('table').on('Pagination_refresh', function(){
+            $(this.table).on('Tableau::pagination_refresh', function(){
                 current_instance.getTableau();
             });
 
@@ -84,25 +84,49 @@
                 $(current_instance.table).closest('.table_wrapper').scrollLeft(0);
                 $(current_instance.table).closest('.table_wrapper').find('.error_msg').show();
                 $(current_instance.table).closest('.table_wrapper').find('.msg_error').html(event.msg);
-                $(current_instance.table).closest('.table_wrapper').find('.refresh_tableau').click(function(){
+                $(current_instance.table).closest('.table_wrapper').find('.refresh_tableau').off().click(function(){
                     current_instance.getTableau();
                 });
             });
 
-            $(this.table).find('table').on('Pagination_call_me_with_filter', function(event, event_name_response){
+            $(this.table).on('Tableau::pagination_call_me_with_filter', function(event, event_name_response){
                 const data = current_instance.getFiltreForPost(); // filtre envoyé sous forme de post
                 data['filtre'] = current_instance.getFiltre(); // filtre envoyé dans le $_POST['filtre'], cela correspond aux filtres du header
                 $('body').trigger(event_name_response, [data]);
             });
 
-            $(this.table).find('table').on('Pagination_add_loading', function(){
+            $(this.table).on('Tableau::pagination_add_loading', function(){
                 $(current_instance.table).closest('.table_wrapper').scrollTop(0);
                 $(current_instance.table).closest('.table_wrapper').scrollLeft(0);
                 $(current_instance.table).closest('.table_wrapper').addClass('loading');
             });
 
-            $(this.table).find('table').on('Pagination_remove_loading', function(){
+            $(this.table).on('Tableau::pagination_remove_loading', function(){
                 $(current_instance.table).closest('.table_wrapper').removeClass('loading');
+            });
+
+            $(this.table).on('Tableau::complete', function(){
+
+                $('.tableau_action_button').off().click(function(){
+
+                    let url = $(this).attr('data-url');
+                    let confirmation_msg = $(this).attr('data-confirmation_msg');
+
+                    $(current_instance.table).closest('.table_wrapper').scrollTop(0);
+                    $(current_instance.table).closest('.table_wrapper').scrollLeft(0);
+                    $(current_instance.table).closest('.table_wrapper').addClass('loading');
+
+                    let data = [];
+
+                    this.xhr = $(current_instance.table).postForTableau( url, data, function( response ) {
+
+                        $(current_instance.table).closest('.table_wrapper').removeClass('loading');
+
+                    });
+
+
+                });
+
             });
 
             // Button export
@@ -286,14 +310,14 @@
             return filtre;
         }
 
-        /** retourne le nombre de colonne du tableau */
+        /** retourne le nombre de colonnes du tableau */
         getMaxColCount(){
             var maxCol = 0;
 
             $(this.table).find('tr').each(function(i,o) {
                 var colCount = 0;
                 $(o).find('td:not(.maxcols),th:not(.maxcols)').each(function(i,oo) {
-                    var cc = Number($(oo).attr('colspan'));
+                    let cc = Number($(oo).attr('colspan'));
                     if (cc) {
                         colCount += cc;
                     } else {
