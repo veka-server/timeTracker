@@ -112,18 +112,40 @@
                     let url = $(this).attr('data-url');
                     let confirmation_msg = $(this).attr('data-confirmation_msg');
 
+                    let data = [];
+                    try{
+                        data = JSON.parse($(this).attr('data-to_send'));
+                    }catch (e){}
+
                     $(current_instance.table).closest('.table_wrapper').scrollTop(0);
                     $(current_instance.table).closest('.table_wrapper').scrollLeft(0);
                     $(current_instance.table).closest('.table_wrapper').addClass('loading');
 
-                    let data = [];
+                    let valid_callback = function(response){
 
-                    this.xhr = $(current_instance.table).postForTableau( url, data, function( response ) {
+                        let success_msg = '';
+                        if(response.success_msg !== undefined && response.success_msg.length > 0){
+                            success_msg = response.success_msg;
+                        } else {
+                            success_msg = Trad.generic_success_msg;
+                        }
+                        Popin.alert(success_msg, Trad.generic_success_title_popin)
 
                         $(current_instance.table).closest('.table_wrapper').removeClass('loading');
+                        current_instance.getTableau();
+                    }
 
-                    });
+                    if(confirmation_msg !== undefined && confirmation_msg !== '' && confirmation_msg.length > 0){
 
+                        Popin.confirm(confirmation_msg, Trad.generic_confirm_title_popin, function(){
+                            current_instance.xhr = $(current_instance.table).postForTableau( url, data, valid_callback);
+                        }, function(){
+                            $(current_instance.table).closest('.table_wrapper').removeClass('loading');
+                        });
+
+                    } else {
+                        current_instance.xhr = $(current_instance.table).postForTableau( url, data, valid_callback);
+                    }
 
                 });
 

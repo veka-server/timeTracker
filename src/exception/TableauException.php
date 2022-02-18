@@ -2,7 +2,7 @@
 
 namespace App\exception;
 
-class TableauException extends \Exception
+class TableauException extends ClientException
 {
 
 }

@@ -5,3 +5,12 @@
     <link rel="shortcut icon" type="image/png" href="/asset/img/icon.png?version={{version}}">
     <link href="/css?version={{version}}" rel="stylesheet" type="text/css" >
     <script src="/js?version={{version}}"></script>
+    <script>
+        Popin.template = {{ include("common/popin.twig") | json_encode | raw }};
+
+        let Trad = {};
+        Trad.generic_error = {{ "erreur_generic" | lang | json_encode | raw }};
+        Trad.generic_confirm_title_popin = {{ "generic_confirm_title_popin" | lang | json_encode | raw }};
+        Trad.generic_success_title_popin = {{ "generic_success_title_popin" | lang | json_encode | raw }};
+        Trad.generic_success_msg = {{ "generic_success_msg" | lang | json_encode | raw }};
+    </script>

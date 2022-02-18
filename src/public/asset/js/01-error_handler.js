@@ -39,7 +39,6 @@ class ErrorHandling {
     catchJqueryAjaError = function(){
         const current_instance = this;
         $( document ).ajaxError(function(event, XHRObject, settings){
-            console.log(event)
             var message = [
                 'ERROR '+XHRObject.status+' : '+XHRObject.statusText,
                 'URL: ' + settings.url
@@ -60,7 +59,7 @@ class ErrorHandling {
                 'Error object: ' + JSON.stringify(error)
             ].join("\r\n");
             current_instance.sendErrorToServer(message, 'error')
-            return true;
+            return false;
         };
     }
 

@@ -109,6 +109,27 @@ return new class() extends Model implements \VekaServer\Interfaces\MigrationInte
 
         Lang::set('confirmation_suppression_utilisateur', 'FR', 'Souhaitez-vous vraiment supprimer cet utilisateur ?');
         Lang::set('confirmation_suppression_utilisateur', 'EN', 'Delete this user ?');
+
+        Lang::set('erreur_generic', 'FR', 'Une erreur est survenue');
+        Lang::set('erreur_generic', 'EN', 'An error has occurred');
+
+        Lang::set('valider', 'FR', 'Valider');
+        Lang::set('valider', 'EN', 'Valid');
+
+        Lang::set('annuler', 'FR', 'Annuler');
+        Lang::set('annuler', 'EN', 'Cancel');
+
+        Lang::set('generic_confirm_title_popin', 'FR', 'Confirmation');
+        Lang::set('generic_confirm_title_popin', 'EN', 'Confirm');
+
+        Lang::set('generic_success_title_popin', 'FR', 'Succès');
+        Lang::set('generic_success_title_popin', 'EN', 'Success');
+
+        Lang::set('generic_success_msg', 'FR', 'Action réalisé avec succès');
+        Lang::set('generic_success_msg', 'EN', 'Action successfully completed');
+
+        Lang::set('utilisateur_supprimé', 'FR', 'Utilisateur supprimé');
+        Lang::set('utilisateur_supprimé', 'EN', 'User deleted');
     }
 
     /**

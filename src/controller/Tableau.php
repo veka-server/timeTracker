@@ -1,8 +1,10 @@
 <?php
 namespace App\controller;
 
+use App\exception\ClientException;
 use App\exception\TableauException;
 use App\model\Model;
+use VekaServer\Framework\Lang;
 use VekaServer\Framework\Log;
 
 class Tableau extends Controller
@@ -58,7 +60,7 @@ class Tableau extends Controller
     {
         return $this->getView('common/table/data.twig',[
             'cleaned_data' => $this->cleaned_data
-            ,'data' => $this->cleaned_data
+            ,'data' => $this->datas
             ,'actions' => $this->actions
         ]);
     }
@@ -69,13 +71,13 @@ class Tableau extends Controller
         try{
             $retour = $callback($retour);
             $retour['success'] = true;
-        }catch (TableauException $e){
+        }catch (ClientException $e){
             $retour['success'] = false;
             $retour['error_msg'] = $e->getMessage();
         }catch (\Exception $e){
             Log::error($e);
             $retour['success'] = false;
-            $retour['error_msg'] = 'Une erreur s\'est produite';
+            $retour['error_msg'] = Lang::get('erreur_generic');
         }
 
         $pagination = ($addPagination === true) ?  Model::getPaginationData() : [];

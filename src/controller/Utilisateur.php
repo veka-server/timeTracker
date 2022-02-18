@@ -1,9 +1,7 @@
 <?php
 namespace App\controller;
 
-use App\exception\TableauException;
 use VekaServer\Framework\Lang;
-use VekaServer\Framework\Log;
 
 class Utilisateur extends Controller
 {
@@ -38,6 +36,7 @@ class Utilisateur extends Controller
         $this->tableau->addAction([
             'url' => '/utilisateur/edit'
             , 'label' => Lang::get('editer')
+            , 'data_to_send' => ['id_utilisateur'] /* liste des variable a envoyer lors de la requete */
             , 'confirmation_msg' => null /* si besoin d'une popin de confirmation */
             , 'icone' => '<i class="far fa-edit"></i>' /* html de l'icone */
             , 'couleur' => 'bleu' /* voir css */
@@ -47,6 +46,7 @@ class Utilisateur extends Controller
         $this->tableau->addAction([
             'url' => '/utilisateur/delete'
             , 'label' => Lang::get('supprimer')
+            , 'data_to_send' => ['id_utilisateur'] /* liste des variable a envoyer lors de la requete */
             , 'confirmation_msg' => Lang::get('confirmation_suppression_utilisateur') /* si besoin d'une popin de confirmation */
             , 'icone' => '<i class="far fa-trash-alt"></i>' /* html de l'icone */
             , 'couleur' => 'rouge' /* voir css */
@@ -125,15 +125,14 @@ class Utilisateur extends Controller
         /** Algo de recuperation des données pour le tableau */
         return $this->getTableau()->setFonctionData(function($arrayForJson){
 
-            $validation = new \App\model\Validation($_POST);
+            $validation = new \App\classe\Validation($_POST);
             $validation->addField('id_utilisateur', ['type' => 'numeric', 'required' => true]);
-
-            if($validation->numeric('id_utilisateur')){
-                throw new TableauException(Lang::get('validation::id_utilisateur'));
-            }
+            $validation->run();
 
             /** recupere les données sans pagination */
-//            \App\model\Utilisateur::delete($validation->get['id_utilisateur']);
+            \App\model\Utilisateur::delete($validation->get('id_utilisateur'));
+
+            $arrayForJson['success_msg'] = Lang::get('utilisateur_supprimé');
 
             return $arrayForJson;
         }, false);
