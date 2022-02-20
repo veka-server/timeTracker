@@ -40,6 +40,7 @@ class Utilisateur extends Controller
             , 'confirmation_msg' => null /* si besoin d'une popin de confirmation */
             , 'icone' => '<i class="far fa-edit"></i>' /* html de l'icone */
             , 'couleur' => 'bleu' /* voir css */
+            , 'type_popin_retour' => 'dialog' /* dialog ou alert */
         ]);
 
         /** ajout du bouton de suppression */
@@ -50,9 +51,57 @@ class Utilisateur extends Controller
             , 'confirmation_msg' => Lang::get('confirmation_suppression_utilisateur') /* si besoin d'une popin de confirmation */
             , 'icone' => '<i class="far fa-trash-alt"></i>' /* html de l'icone */
             , 'couleur' => 'rouge' /* voir css */
+            , 'type_popin_retour' => 'alert' /* dialog ou alert, default : alert */
         ]);
 
         return $this->tableau;
+    }
+
+    public function getFormulaire(){
+        return [
+
+            (new \App\classe\Input())
+                ->setKey('id_utilisateur')
+                ->setType('hidden')
+                ->setValidation(['type' => 'numeric', 'required' => true])
+
+            ,(new \App\classe\Input())
+                ->setKey('nom')
+                ->setType('text')
+                ->setLabel('nom')
+                ->setIcon('fa fa-user fa-lg fa-fw')
+                ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
+                ->setPlaceholder('Doe')
+                ->setRequired(true)
+
+            ,(new \App\classe\Input())
+                ->setKey('prenom')
+                ->setType('text')
+                ->setLabel('prenom')
+                ->setIcon('fa fa-user fa-lg fa-fw')
+                ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
+                ->setPlaceholder('John')
+                ->setRequired(true)
+
+            ,(new \App\classe\Input())
+                ->setKey('email')
+                ->setType('text')
+                ->setLabel('email')
+                ->setIcon('fa fa-envelope fa-lg fa-fw')
+                ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
+                ->setPlaceholder('john.doe@gmail.com')
+                ->setRequired(true)
+
+            ,(new \App\classe\Input())
+                ->setKey('telephone')
+                ->setType('text')
+                ->setLabel('telephone')
+                ->setIcon('fa fa-phone fa-lg fa-fw')
+                ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
+                ->setPlaceholder('0123456789')
+                ->setRequired(false)
+
+        ];
     }
 
     /**
@@ -122,17 +171,63 @@ class Utilisateur extends Controller
     /** retourne le json a l'ajax de recuperation de la suppression */
     public function ajax_delete()
     {
-        /** Algo de recuperation des données pour le tableau */
         return $this->getTableau()->setFonctionData(function($arrayForJson){
 
-            $validation = new \App\classe\Validation($_POST);
-            $validation->addField('id_utilisateur', ['type' => 'numeric', 'required' => true]);
-            $validation->run();
+            $validation = (new \App\classe\Validation($_POST))
+                ->addFieldsFromArray($this->getFormulaire())
+                ->runByKey('id_utilisateur');
 
-            /** recupere les données sans pagination */
             \App\model\Utilisateur::delete($validation->get('id_utilisateur'));
 
             $arrayForJson['success_msg'] = Lang::get('utilisateur_supprimé');
+
+            return $arrayForJson;
+        }, false);
+    }
+
+    /** retourne le json a l'ajax d'édition */
+    public function ajax_edit()
+    {
+        return $this->getTableau()->setFonctionData(function($arrayForJson){
+
+            $validation = (new \App\classe\Validation($_POST))
+                ->addFieldsFromArray($this->getFormulaire())
+                ->runByKey('id_utilisateur');
+
+            $utilisateur = \App\model\Utilisateur::getByID($validation->get('id_utilisateur'));
+
+            $forms = (new \App\classe\Forms())
+                ->setMethod('POST')
+                ->setUrl('/utilisateur/save') // default current url
+                ->setSize('600px')
+                ->addFieldsFromArray($this->getFormulaire())
+                ->addData($utilisateur[0]);
+
+            $arrayForJson['html'] = $forms->getHtml();
+            $arrayForJson['success_titre'] = Lang::get('edition_utilisateur');
+
+            return $arrayForJson;
+        }, false);
+    }
+
+    public function ajax_save()
+    {
+        return $this->getTableau()->setFonctionData(function($arrayForJson){
+
+            $validation = (new \App\classe\Validation($_POST))
+                ->addFieldsFromArray($this->getFormulaire())
+                ->run();
+
+            $list_fields = [];
+            foreach ($this->getFormulaire() as $item){
+                if($item->getKey() == 'id_utilisateur'){
+                    continue;
+                }
+                $list_fields[$item->getKey()] = $validation->get($item->getKey());
+            }
+            \App\model\Utilisateur::update($validation->get('id_utilisateur'), $list_fields);
+
+            $arrayForJson['success_msg'] = Lang::get('utilisateur_edité');
 
             return $arrayForJson;
         }, false);

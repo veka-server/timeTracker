@@ -36,3 +36,7 @@
 .background_popup_main .popin-container .row .footer{display:block;width:100%;border-top:1px solid rgba(0,0,0,0.2);background:rgba(0,0,0,0.07);text-align:right}
 .background_popup_main .popin-container .row .footer button{margin:10px}
 
+/* loader */
+.background_popup_main .loading{position:relative;overflow: hidden}
+.background_popup_main .loading::before{content:'';display:inline-block;width:100%;height:100%;position:absolute;top:0;left:0;background:rgba(0,0,0,0.35);z-index:9}
+.background_popup_main .loading::after{font-family:"Font Awesome 5 Free";content:"\f021";font-weight: 900;display:inline-block;width:40px;height:40px;position:absolute;top:calc(50% - 20px);left:calc(50% - 20px);color:#fff;z-index:10;-webkit-animation:spin 2s infinite linear;animation:spin 2s infinite linear;text-align:center;font-size:40px;line-height:40px}

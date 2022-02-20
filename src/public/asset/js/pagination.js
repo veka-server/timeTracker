@@ -111,6 +111,10 @@
 
                     let url = $(this).attr('data-url');
                     let confirmation_msg = $(this).attr('data-confirmation_msg');
+                    let type_popin_retour = $(this).attr('data-type_popin_retour');
+                    if(type_popin_retour === undefined || type_popin_retour.length <= 0){
+                        type_popin_retour = 'alert';
+                    }
 
                     let data = [];
                     try{
@@ -123,16 +127,16 @@
 
                     let valid_callback = function(response){
 
-                        let success_msg = '';
-                        if(response.success_msg !== undefined && response.success_msg.length > 0){
-                            success_msg = response.success_msg;
-                        } else {
-                            success_msg = Trad.generic_success_msg;
-                        }
-                        Popin.alert(success_msg, Trad.generic_success_title_popin)
+                        let success = $(response).getSuccessMsgFromResponse();
+                        Popin[type_popin_retour](success.content, success.titre)
 
                         $(current_instance.table).closest('.table_wrapper').removeClass('loading');
-                        current_instance.getTableau();
+
+                        if(type_popin_retour === 'alert'){
+                            current_instance.getTableau();
+                        }
+
+                        $(current_instance.table).attr('data-refreshme', true);
                     }
 
                     if(confirmation_msg !== undefined && confirmation_msg !== '' && confirmation_msg.length > 0){

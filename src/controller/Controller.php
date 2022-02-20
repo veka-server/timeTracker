@@ -18,7 +18,7 @@ class Controller extends \VekaServer\Framework\Controller
             ,'active_menu' => static::$menu
         ];
 
-        $template = $params['surcharge_template'] ??'common/template.twig';
+        $template = $params['surcharge_template'] ??'common/template/template.twig';
 
         return $this->getView($template,$config);
     }

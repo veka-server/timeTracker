@@ -2,7 +2,6 @@
 
 namespace App\classe;
 
-use App\exception\TableauException;
 use App\exception\ValidationException;
 use VekaServer\Framework\Lang;
 
@@ -20,6 +19,7 @@ class Validation
     public function __construct(array $datas)
     {
         $this->datas = $datas;
+        return $this;
     }
 
     /**
@@ -33,9 +33,10 @@ class Validation
     /**
      * @param array $datas
      */
-    public function setDatas(array $datas): void
+    public function setDatas(array $datas): Validation
     {
         $this->datas = $datas;
+        return $this;
     }
 
     public function numeric(string $key, $required = false)
@@ -51,9 +52,10 @@ class Validation
         return $this->datas[$key];
     }
 
-    public function addField(string $key, array $array)
+    public function addField(string $key, array $array): Validation
     {
         $this->list_keys[$key] = $array;
+        return $this;
     }
 
     /**
@@ -61,19 +63,38 @@ class Validation
      */
     public function run()
     {
-        foreach ($this->list_keys as $field => $item){
+        foreach ($this->list_keys as $field => $input){
+            $this->runByKey($field);
+        }
 
-            switch ($item['type'] ?? null){
+        return $this;
+    }
 
-                case 'numeric':
-                    if($this->numeric($field, ($item['required'] ?? false)) === false){
-                        throw new ValidationException(Lang::get('validation::'.$field));
-                    }
-                    break;
+    /**
+     * @throws ValidationException
+     */
+    public function runByKey($key)
+    {
+        $item = $this->list_keys[$key]->getValidation();
+        switch ($item['type'] ?? null){
 
-            }
+            case 'numeric':
+                if($this->numeric($key, ($item['required'] ?? false)) === false){
+                    throw new ValidationException(Lang::get('validation::'.$key));
+                }
+                break;
 
         }
 
+        return $this;
     }
+
+    public function addFieldsFromArray(array $array_input): Validation
+    {
+        foreach ($array_input as $input){
+            $this->list_keys[$input->getKey()] = $input;
+        }
+        return $this;
+    }
+
 }

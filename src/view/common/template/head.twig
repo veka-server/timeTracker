@@ -6,7 +6,7 @@
     <link href="/css?version={{version}}" rel="stylesheet" type="text/css" >
     <script src="/js?version={{version}}"></script>
     <script>
-        Popin.template = {{ include("common/popin.twig") | json_encode | raw }};
+        Popin.template = {{ include("common/popin/popin.twig") | json_encode | raw }};
 
         let Trad = {};
         Trad.generic_error = {{ "erreur_generic" | lang | json_encode | raw }};

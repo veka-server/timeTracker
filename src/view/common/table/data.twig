@@ -8,6 +8,7 @@
             <span class="tableau_action_button button small {{ action.couleur }}"
                   data-url="{{ action.url }}"
                   data-confirmation_msg="{{ action.confirmation_msg }}"
+                  data-type_popin_retour="{{ action.type_popin_retour }}"
 
                     {% set array_data_to_send = [] %}
                     {% for variable in action.data_to_send %}

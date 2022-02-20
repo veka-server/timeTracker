@@ -34,7 +34,15 @@ class Popin {
 
     close = function(){
         const current_instance = this;
+
+        /** si presence du flag alors on ne ferme pas la popin */
+        if($('#'+this.id+' .popin-container').attr('data-no-close') !== undefined){
+            $('#'+this.id+' .popin-container').removeAttr('data-no-close');
+            return ;
+        }
+
         $('#'+this.id+' .popin-container').addClass('popout');
+
         setTimeout(function(){
             $('#'+current_instance.id).remove();
         },250)

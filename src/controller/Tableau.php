@@ -2,7 +2,6 @@
 namespace App\controller;
 
 use App\exception\ClientException;
-use App\exception\TableauException;
 use App\model\Model;
 use VekaServer\Framework\Lang;
 use VekaServer\Framework\Log;
