@@ -30,15 +30,15 @@ input[type="text"]:focus {
     box-shadow: 0 0 3px 0 dodgerBlue;
 }
 
-.inputWithIcon input[type="text"] {
+.global_input.inputWithIcon input[type="text"] {
     padding-left: 40px;
 }
 
-.inputWithIcon {
+.global_input.inputWithIcon {
     position: relative;
 }
 
-.inputWithIcon i {
+.global_input.inputWithIcon i {
     position: absolute;
     left: 0;
     top: 8px;
@@ -47,11 +47,11 @@ input[type="text"]:focus {
     transition: 0.3s;
 }
 
-.inputWithIcon input[type="text"]:focus + label i {
+.global_input.inputWithIcon input[type="text"]:focus + label i {
     color: dodgerBlue;
 }
 
-.inputWithIcon.inputIconBg i {
+.global_input.inputWithIcon.inputIconBg i {
     background-color: #aaa;
     color: #fff;
     padding: 10px 10px;
@@ -59,8 +59,25 @@ input[type="text"]:focus {
     border-radius: 4px 0 0 4px;
 }
 
-.inputWithIcon.inputIconBg input[type="text"]:focus + label i {
+.global_input.inputWithIcon.inputIconBg input[type="text"]:focus + label i {
     color: #fff;
     background-color: dodgerBlue;
 }
 
+.global_input[data-validation-error] input:not(:focus) {
+    border-color: red;
+    box-shadow: 0 0 3px 0 red;
+}
+
+.global_input[data-validation-error]:not(:focus-within)::after {
+    content: attr(data-validation-error);
+    display: block;
+    width: 100%;
+    color: red;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+    position: absolute;
+    top:47px;left: 0;
+    font-size: 0.9em;
+}

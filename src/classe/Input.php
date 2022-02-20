@@ -13,6 +13,7 @@ class Input
     private $placeholder;
     private $required;
     private $validation;
+    private $contrainte;
 
     public function __construct()
     {
@@ -150,5 +151,22 @@ class Input
     public function getValidation()
     {
         return $this->validation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContrainte()
+    {
+        return $this->contrainte;
+    }
+
+    /**
+     * @param mixed $contrainte
+     */
+    public function setContrainte($contrainte): Input
+    {
+        $this->contrainte = $contrainte;
+        return $this;
     }
 }

@@ -1,7 +1,15 @@
 <div class="inputBloc {% if input.type != 'hidden' %} {{ input.size | default('col-12') }} {% endif %}">
     <label for="{{ input.key }}">{{ input.label | lang }}</label>
-    <div class="inputWithIcon">
-        <input type="{{ input.type  | default('text') }}" name="{{ input.key }}" id="{{ input.key }}" placeholder="{{ input.placeholder }}" value="{{ attribute(datas, input.key) }}" >
+    <div class="inputWithIcon global_input">
+        <input
+                type="{{ input.type  | default('text') }}"
+                name="{{ input.key }}"
+                id="{{ input.key }}"
+                placeholder="{{ input.placeholder }}"
+                value="{{ attribute(datas, input.key) }}"
+
+                data-validation-list-contrainte="{{ input.contrainte | join(',') }}"
+        >
         <label for="{{ input.key }}">
             <i class="{{ input.icon }}" aria-hidden="true"></i>
         </label>

@@ -73,6 +73,7 @@ class Utilisateur extends Controller
                 ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
                 ->setPlaceholder('Doe')
                 ->setRequired(true)
+                ->setContrainte(['required', 'alphanumeric'])
 
             ,(new \App\classe\Input())
                 ->setKey('prenom')
@@ -82,6 +83,7 @@ class Utilisateur extends Controller
                 ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
                 ->setPlaceholder('John')
                 ->setRequired(true)
+                ->setContrainte(['required', 'alphanumeric'])
 
             ,(new \App\classe\Input())
                 ->setKey('email')
@@ -90,7 +92,7 @@ class Utilisateur extends Controller
                 ->setIcon('fa fa-envelope fa-lg fa-fw')
                 ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
                 ->setPlaceholder('john.doe@gmail.com')
-                ->setRequired(true)
+                ->setContrainte(['required', 'email'])
 
             ,(new \App\classe\Input())
                 ->setKey('telephone')
@@ -100,6 +102,7 @@ class Utilisateur extends Controller
                 ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
                 ->setPlaceholder('0123456789')
                 ->setRequired(false)
+                ->setContrainte(['required', 'numeric'])
 
         ];
     }
