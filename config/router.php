@@ -21,7 +21,7 @@ return (new \VekaServer\Rooter\Rooter())
     ->post('/utilisateur/export',function(){echo (new \App\controller\Utilisateur())->ajax_export();})
     ->post('/utilisateur/delete',function(){echo (new \App\controller\Utilisateur())->ajax_delete();})
     ->post('/utilisateur/edit',function(){echo (new \App\controller\Utilisateur())->ajax_edit();})
-    ->post('/utilisateur/save',function(){echo (new \App\controller\Utilisateur())->ajax_save();})
+    ->post('/utilisateur/save',function(){echo (new \App\controller\Utilisateur())->ajax_save_edition();})
 
     // Page dashboard
     ->get('/',function(){

@@ -60,6 +60,10 @@
 
         }, 'json').fail(function(response) {
 
+            if(response.statusText === 'abort'){
+                return ;
+            }
+
             const event = $.Event("Tableau::show_error_inside_tableau");
             event.msg = 'Error '+response.status+' : '+response.statusText;
             $(table).trigger( event );
@@ -134,7 +138,7 @@
             }
 
             let success = $(response).getSuccessMsgFromResponse();
-            Popin.alert(success.msg, success.titre)
+            Popin.alert(success.content, success.titre)
 
             if(typeof callback === "function"){
                 callback(response)

@@ -99,6 +99,12 @@ class Validation {
                     , msg: 'Ce champ n\'est pas un email valide'
                 };
 
+            case 'telephone':
+                return {
+                    status: current_validation.is_telephone(input) === false
+                    , msg: 'Ce champ n\'est pas un numéro de téléphone valide'
+                };
+
             case 'required':
                 return {
                     status: current_validation.is_empty(input) === true
@@ -111,7 +117,7 @@ class Validation {
 
     is_numeric = function(input){
         let val = $(input).val();
-        return !isNaN(parseFloat(val)) && isFinite(val);
+        return (/^0|[1-9]\d*$/.test(val));
     }
 
     is_alphanumeric = function(input){
@@ -123,6 +129,11 @@ class Validation {
     is_email = function(input){
         let val = $(input).val();
         return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val));
+    }
+
+    is_telephone = function(input){
+        let val = $(input).val();
+        return (/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/gmi.test(val));
     }
 
     is_empty = function(input){

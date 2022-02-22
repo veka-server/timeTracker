@@ -63,7 +63,7 @@ class Utilisateur extends Controller
             (new \App\classe\Input())
                 ->setKey('id_utilisateur')
                 ->setType('hidden')
-                ->setValidation(['type' => 'numeric', 'required' => true])
+                ->setContrainte(['required', 'numeric'])
 
             ,(new \App\classe\Input())
                 ->setKey('nom')
@@ -72,7 +72,6 @@ class Utilisateur extends Controller
                 ->setIcon('fa fa-user fa-lg fa-fw')
                 ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
                 ->setPlaceholder('Doe')
-                ->setRequired(true)
                 ->setContrainte(['required', 'alphanumeric'])
 
             ,(new \App\classe\Input())
@@ -82,7 +81,6 @@ class Utilisateur extends Controller
                 ->setIcon('fa fa-user fa-lg fa-fw')
                 ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
                 ->setPlaceholder('John')
-                ->setRequired(true)
                 ->setContrainte(['required', 'alphanumeric'])
 
             ,(new \App\classe\Input())
@@ -101,8 +99,7 @@ class Utilisateur extends Controller
                 ->setIcon('fa fa-phone fa-lg fa-fw')
                 ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
                 ->setPlaceholder('0123456789')
-                ->setRequired(false)
-                ->setContrainte(['required', 'numeric'])
+                ->setContrainte(['required', 'telephone'])
 
         ];
     }
@@ -213,7 +210,7 @@ class Utilisateur extends Controller
         }, false);
     }
 
-    public function ajax_save()
+    public function ajax_save_edition()
     {
         return $this->getTableau()->setFonctionData(function($arrayForJson){
 

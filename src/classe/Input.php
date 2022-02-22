@@ -105,23 +105,6 @@ class Input
     }
 
     /**
-     * @return mixed
-     */
-    public function getRequired()
-    {
-        return $this->required;
-    }
-
-    /**
-     * @param mixed $required
-     */
-    public function setRequired($required): Input
-    {
-        $this->required = $required;
-        return $this;
-    }
-
-    /**
      * @param mixed $placeholder
      */
     public function setPlaceholder($placeholder): Input
@@ -137,20 +120,6 @@ class Input
     {
         $this->size = $size;
         return $this;
-    }
-
-    public function setValidation(array $validation)
-    {
-        $this->validation = $validation;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValidation()
-    {
-        return $this->validation;
     }
 
     /**

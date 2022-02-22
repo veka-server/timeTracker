@@ -43,6 +43,12 @@ class ErrorHandling {
                 'ERROR '+XHRObject.status+' : '+XHRObject.statusText,
                 'URL: ' + settings.url
             ].join("\r\n");
+
+            /** ne pas catcher les ajax abort car c'est probablement une volonté */
+            if(XHRObject.statusText === 'abort'){
+                return ;
+            }
+
             current_instance.sendErrorToServer(message, 'error')
             return false;
         });
