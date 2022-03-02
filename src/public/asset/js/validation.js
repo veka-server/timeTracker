@@ -9,6 +9,7 @@ class Validation {
         this.flag_already_parsed = 'data-validation-already-parsed';
         this.flag_list_contrainte = 'data-validation-list-contrainte';
         this.flag_error = 'data-validation-error';
+        this.xhr_ajax = [];
 
         this.parseAllHTML();
     }
@@ -31,6 +32,18 @@ class Validation {
         $(input).on('change', function(){
             current_validation.checkAll(input);
         });
+
+        if($(input).attr('data-hide-error-at-parse') === "true"){
+            $(input).on('focusout', function(){
+                if($(input).attr('data-hide-error-at-parse') !== "true"){
+                    return ;
+                }
+                $(input).removeAttr('data-hide-error-at-parse');
+                current_validation.checkAll(input);
+            });
+            return ;
+        }
+
         $(input).change();
     }
 
@@ -71,15 +84,41 @@ class Validation {
         }
     }
 
+    ajax_check = function(input, contrainte){
+        const current_validation = this;
+        if(current_validation.xhr_ajax[$(input).attr('id')]){
+            current_validation.xhr_ajax[$(input).attr('id')].abort();
+        }
+
+        /** call ajax for check */
+        let data = {};
+        $(input).closest('form').find(':input').each(function(){
+            data[$(this).attr('name')] = $(this).val();
+        });
+        data[$(input).attr('name')] = $(input).val();
+        data['check'] = contrainte.replace('AJAX_CHECK::', '');
+        current_validation.xhr_ajax[$(input).attr('id')] = $(input).postForContrainte('/js_check_input', data)
+
+        /** ne pas retourner d'erreur pendant le check */
+        return {
+            status: false
+            , msg: ''
+        };
+    }
+
     check = function(input, contrainte) {
         const current_validation = this;
 
-        contrainte = contrainte.trim().toLowerCase();
+        let contrainte_to_lower = contrainte.trim().toLowerCase();
         if(contrainte !== 'required' && current_validation.is_empty(input)){
             return {status:false, msg:''}
         }
 
-        switch(contrainte){
+        if (contrainte.match("^AJAX_CHECK::")) {
+            return current_validation.ajax_check(input, contrainte);
+        }
+
+        switch(contrainte_to_lower){
 
             case 'numeric':
                 return {

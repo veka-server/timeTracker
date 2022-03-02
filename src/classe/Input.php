@@ -131,6 +131,36 @@ class Input
     }
 
     /**
+     * @return mixed
+     */
+    public function getContrainteForJS()
+    {
+        /**
+         * ne pas retourner les callable sous forme de callable mais plutot sour forme de string
+         * Ces string seront utiliser pour des appel ajax associé
+         */
+        $contraintes = [];
+        foreach ($this->contrainte as $contrainte){
+
+            if(is_callable($contrainte)){
+
+                /**
+                 * ne pas ajouter la contrainte si fonction anonyme car pas possible de faire fonctionner l'ajax
+                 * idem si le callable n'est pas un array
+                 */
+                if ($contrainte instanceof \Closure || !is_array($contrainte)) {
+                    continue;
+                }
+
+                $contrainte = 'AJAX_CHECK::'.base64_encode($contrainte[1]);
+            }
+            $contraintes[] = $contrainte;
+        }
+
+        return $contraintes;
+    }
+
+    /**
      * @param mixed $contrainte
      */
     public function setContrainte($contrainte): Input

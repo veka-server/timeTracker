@@ -1,6 +1,7 @@
 <?php
 namespace App\controller;
 
+use App\classe\Contrainte;
 use VekaServer\Framework\Lang;
 
 class Utilisateur extends Controller
@@ -57,13 +58,14 @@ class Utilisateur extends Controller
         return $this->tableau;
     }
 
-    public function getFormulaire(){
+    public function getFormulaire(): array
+    {
         return [
 
             (new \App\classe\Input())
                 ->setKey('id_utilisateur')
                 ->setType('hidden')
-                ->setContrainte(['required', 'numeric'])
+                ->setContrainte(['numeric'])
 
             ,(new \App\classe\Input())
                 ->setKey('nom')
@@ -90,7 +92,7 @@ class Utilisateur extends Controller
                 ->setIcon('fa fa-envelope fa-lg fa-fw')
                 ->setSize('col-6') // 12=100% | 6=50% | 4=30% ...
                 ->setPlaceholder('john.doe@gmail.com')
-                ->setContrainte(['required', 'email'])
+                ->setContrainte(['required', 'email', [Contrainte::class, 'check_email_doublon'] ])
 
             ,(new \App\classe\Input())
                 ->setKey('telephone')
@@ -198,19 +200,38 @@ class Utilisateur extends Controller
 
             $forms = (new \App\classe\Forms())
                 ->setMethod('POST')
-                ->setUrl('/utilisateur/save') // default current url
+                ->setUrl('/utilisateur/save-edit') // default current url
                 ->setSize('600px')
                 ->addFieldsFromArray($this->getFormulaire())
                 ->addData($utilisateur[0]);
 
             $arrayForJson['html'] = $forms->getHtml();
-            $arrayForJson['success_titre'] = Lang::get('edition_utilisateur');
+            $arrayForJson['success_titre'] = Lang::get('user_popin_edition');
 
             return $arrayForJson;
         }, false);
     }
 
-    public function ajax_save_edition()
+    /** retourne le json a l'ajax de creation */
+    public function ajax_add()
+    {
+        return $this->getTableau()->setFonctionData(function($arrayForJson){
+
+            $forms = (new \App\classe\Forms())
+                ->setMethod('POST')
+                ->setUrl('/utilisateur/save-add') // default current url
+                ->setSize('600px')
+                ->setHideErrorMessageAtStart(true)
+                ->addFieldsFromArray($this->getFormulaire());
+
+            $arrayForJson['html'] = $forms->getHtml();
+            $arrayForJson['success_titre'] = Lang::get('user_popin_creation');
+
+            return $arrayForJson;
+        }, false);
+    }
+
+    public function ajax_save_edit()
     {
         return $this->getTableau()->setFonctionData(function($arrayForJson){
 
@@ -225,9 +246,35 @@ class Utilisateur extends Controller
                 }
                 $list_fields[$item->getKey()] = $validation->get($item->getKey());
             }
+
             \App\model\Utilisateur::update($validation->get('id_utilisateur'), $list_fields);
 
-            $arrayForJson['success_msg'] = Lang::get('utilisateur_edité');
+            $arrayForJson['success_msg'] = Lang::get('user_saved');
+
+            return $arrayForJson;
+        }, false);
+    }
+
+    public function ajax_save_add()
+    {
+        return $this->getTableau()->setFonctionData(function($arrayForJson){
+
+            $validation = (new \App\classe\Validation($_POST))
+                ->addFieldsFromArray($this->getFormulaire())
+                ->run();
+
+            $list_fields = [];
+            foreach ($this->getFormulaire() as $item){
+                $list_fields[$item->getKey()] = $validation->get($item->getKey());
+            }
+
+            $new_password = \App\classe\Utilisateur::randomPassword();
+            $list_fields['password'] = $new_password;
+
+            \App\model\Utilisateur::add($list_fields);
+
+            $arrayForJson['success_msg'] = Lang::get('user_saved');
+            $arrayForJson['success_msg'] .= '<br/>'.Lang::get('password').' = '.$new_password;
 
             return $arrayForJson;
         }, false);

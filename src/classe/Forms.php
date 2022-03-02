@@ -11,6 +11,7 @@ class Forms extends Controller
     private $fields;
     private $size;
     private $url;
+    private $hideErrorMessageAtStart = false;
 
     public function __construct()
     {
@@ -41,6 +42,7 @@ class Forms extends Controller
             ,'fields' => $this->fields
             ,'size' => $this->size
             ,'url' => $this->url
+            ,'hideErrorMessageAtStart' => $this->getHideErrorMessageAtStart()
         ]);
     }
 
@@ -64,5 +66,15 @@ class Forms extends Controller
         return $this;
     }
 
+    public function setHideErrorMessageAtStart(bool $hideErrorMessageAtStart = false)
+    {
+        $this->hideErrorMessageAtStart = $hideErrorMessageAtStart;
+        return $this;
+    }
+
+    public function getHideErrorMessageAtStart()
+    {
+        return $this->hideErrorMessageAtStart;
+    }
 
 }

@@ -2,7 +2,7 @@
 <div class="container_table {% if full_width == true %}full_width{% endif %}">
 
     {% if urlNewRow is defined and urlNewRow is not null %}
-        <div class="new_row button vert" data-url="{{ urlNewRow }}"><i class="fas fa-plus"></i> {{ "new_row" | lang }}</div>
+        <div class="new_row button vert tableau_action_button" data-url="{{ urlNewRow }}"><i class="fas fa-plus"></i> {{ "new_row" | lang }}</div>
     {% endif %}
 
     {% if urlExport is defined and urlExport is not null %}

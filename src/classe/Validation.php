@@ -69,47 +69,58 @@ class Validation
                 continue;
             }
 
-            switch (trim($contrainte) ?? null){
-
-                default :
-                    Log::notice('VALIDATION : la contrainte "'.$contrainte.'" n\'existe pas');
-                    break;
-
-                case 'required':
-                    if(empty($this->datas[$key]) && $this->datas[$key] != 0){
-                        throw new ValidationException(Lang::get('validation::required::'.$key. ' '.$this->datas[$key]));
-                    }
-                    break;
-
-                case 'numeric':
-                    if($this->numeric($this->datas[$key]) === false){
-                        throw new ValidationException(Lang::get('validation::numeric::'.$key));
-                    }
-                    break;
-
-                case 'alphanumeric':
-                    if($this->alphanumeric($this->datas[$key]) === false){
-                        throw new ValidationException(Lang::get('validation::alphanumeric::'.$key));
-                    }
-                    break;
-
-                case 'email':
-                    if($this->email($this->datas[$key]) === false){
-                        throw new ValidationException(Lang::get('validation::alphanumeric::'.$key));
-                    }
-                    break;
-
-                case 'telephone':
-                    if($this->telephone($this->datas[$key]) === false){
-                        throw new ValidationException(Lang::get('validation::alphanumeric::'.$key));
-                    }
-                    break;
-
+            if(is_string($contrainte)){
+                $this->checkLocalContrainte($contrainte, $key);
+            } else if(is_callable($contrainte)){
+                $contrainte($contrainte, $key);
             }
 
         }
 
         return $this;
+    }
+
+    protected function checkLocalContrainte(string $contrainte, $key)
+    {
+
+        switch (trim($contrainte) ?? null){
+
+            default :
+                Log::notice('VALIDATION : la contrainte "'.$contrainte.'" n\'existe pas');
+                break;
+
+            case 'required':
+                if( (empty($this->datas[$key]) && $this->datas[$key] != 0) || $this->datas[$key] == ''){
+                    throw new ValidationException(Lang::get('validation::required::'.$key. ' '.$this->datas[$key]));
+                }
+                break;
+
+            case 'numeric':
+                if($this->numeric($this->datas[$key]) === false){
+                    throw new ValidationException(Lang::get('validation::numeric::'.$key));
+                }
+                break;
+
+            case 'alphanumeric':
+                if($this->alphanumeric($this->datas[$key]) === false){
+                    throw new ValidationException(Lang::get('validation::alphanumeric::'.$key));
+                }
+                break;
+
+            case 'email':
+                if($this->email($this->datas[$key]) === false){
+                    throw new ValidationException(Lang::get('validation::alphanumeric::'.$key));
+                }
+                break;
+
+            case 'telephone':
+                if($this->telephone($this->datas[$key]) === false){
+                    throw new ValidationException(Lang::get('validation::alphanumeric::'.$key));
+                }
+                break;
+
+        }
+
     }
 
     public function addFieldsFromArray(array $array_input): Validation
@@ -149,5 +160,6 @@ class Validation
     {
         return $this->regex('/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/', $value);
     }
+
 
 }

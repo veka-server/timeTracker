@@ -20,8 +20,10 @@ return (new \VekaServer\Rooter\Rooter())
     ->post('/utilisateur/liste',function(){echo (new \App\controller\Utilisateur())->ajax_liste();})
     ->post('/utilisateur/export',function(){echo (new \App\controller\Utilisateur())->ajax_export();})
     ->post('/utilisateur/delete',function(){echo (new \App\controller\Utilisateur())->ajax_delete();})
+    ->post('/utilisateur/add',function(){echo (new \App\controller\Utilisateur())->ajax_add();})
     ->post('/utilisateur/edit',function(){echo (new \App\controller\Utilisateur())->ajax_edit();})
-    ->post('/utilisateur/save',function(){echo (new \App\controller\Utilisateur())->ajax_save_edition();})
+    ->post('/utilisateur/save-edit',function(){echo (new \App\controller\Utilisateur())->ajax_save_edit();})
+    ->post('/utilisateur/save-add',function(){echo (new \App\controller\Utilisateur())->ajax_save_add();})
 
     // Page dashboard
     ->get('/',function(){
@@ -29,6 +31,9 @@ return (new \VekaServer\Rooter\Rooter())
         \App\classe\Utilisateur::RedirectIfNotConnected(\VekaServer\Config\Config::getInstance()->get('login_page'));
         echo (new \App\controller\Dashboard())->show_page();
     })
+
+    // Gestion des contraintes JS en AJAX sur les formulaires
+    ->post('/js_check_input',function(){ echo (new \App\classe\Contrainte())->ajax();})
 
     // page de gestion des erreurs Javascript
     ->post('/error_js_caught',function(){(new \App\controller\JsErrorHandler())->catchJsError();})

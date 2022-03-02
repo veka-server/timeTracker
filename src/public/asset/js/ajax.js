@@ -162,4 +162,38 @@
         });
     };
 
+    $.fn.postForContrainte = function(url, data) {
+
+        let input = $(this);
+        $(input).closest('.global_input').addClass('input_loading');
+
+        return $.post( url, data, function( response ) {
+
+            let error_msg = $(response).getErrorMsgFromResponse();
+            if(error_msg.length > 0){
+                Popin.alert(error_msg);
+                return ;
+            }
+
+            /**  si deja en rouge alors on ne change pas le statut */
+            if($(input).closest('.global_input').attr((new Validation()).flag_error) !== undefined){
+                return ;
+            }
+
+            new Validation().showErrorStatut(input, {
+                status: response.contrainte_failed
+                , msg: response.contrainte_msg
+            }) ;
+
+        }, 'json').fail(function(response) {
+            if(response.statusText === "abort"){
+                return ;
+            }
+            Popin.alert(Trad.generic_error);
+        }).always(function() {
+            $(input).closest('.global_input').removeClass('input_loading');
+        });
+
+    };
+
 }( jQuery ));
