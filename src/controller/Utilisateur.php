@@ -1,8 +1,12 @@
 <?php
 namespace App\controller;
 
-use App\classe\Contrainte;
 use VekaServer\Framework\Lang;
+use VekaServer\TableForm\Contrainte;
+use VekaServer\TableForm\Forms;
+use VekaServer\TableForm\Input;
+use VekaServer\TableForm\Tableau;
+use VekaServer\TableForm\Validation;
 
 class Utilisateur extends Controller
 {
@@ -62,12 +66,12 @@ class Utilisateur extends Controller
     {
         return [
 
-            (new \App\classe\Input())
+            (new Input())
                 ->setKey('id_utilisateur')
                 ->setType('hidden')
                 ->setContrainte(['numeric'])
 
-            ,(new \App\classe\Input())
+            ,(new Input())
                 ->setKey('nom')
                 ->setType('text')
                 ->setLabel('nom')
@@ -76,7 +80,7 @@ class Utilisateur extends Controller
                 ->setPlaceholder('Doe')
                 ->setContrainte(['required', 'alphanumeric'])
 
-            ,(new \App\classe\Input())
+            ,(new Input())
                 ->setKey('prenom')
                 ->setType('text')
                 ->setLabel('prenom')
@@ -85,7 +89,7 @@ class Utilisateur extends Controller
                 ->setPlaceholder('John')
                 ->setContrainte(['required', 'alphanumeric'])
 
-            ,(new \App\classe\Input())
+            ,(new Input())
                 ->setKey('email')
                 ->setType('text')
                 ->setLabel('email')
@@ -94,7 +98,7 @@ class Utilisateur extends Controller
                 ->setPlaceholder('john.doe@gmail.com')
                 ->setContrainte(['required', 'email', [Contrainte::class, 'check_email_doublon'] ])
 
-            ,(new \App\classe\Input())
+            ,(new Input())
                 ->setKey('telephone')
                 ->setType('text')
                 ->setLabel('telephone')
@@ -121,7 +125,7 @@ class Utilisateur extends Controller
     }
 
     /** retourne le json a l'ajax de recuperation de données */
-    public function ajax_liste()
+    public function ajax_liste(): bool|string
     {
         /** Algo de recuperation des données pour le tableau */
         return $this->getTableau()->setFonctionData(function($arrayForJson){
@@ -140,7 +144,7 @@ class Utilisateur extends Controller
     }
 
     /** retourne le json a l'ajax de recuperation de l'export */
-    public function ajax_export()
+    public function ajax_export(): bool|string
     {
         /** Algo de recuperation des données pour le tableau */
         return $this->getTableau()->setFonctionData(function($arrayForJson){
@@ -171,11 +175,11 @@ class Utilisateur extends Controller
     }
 
     /** retourne le json a l'ajax de recuperation de la suppression */
-    public function ajax_delete()
+    public function ajax_delete(): bool|string
     {
         return $this->getTableau()->setFonctionData(function($arrayForJson){
 
-            $validation = (new \App\classe\Validation($_POST))
+            $validation = (new Validation($_POST))
                 ->addFieldsFromArray($this->getFormulaire())
                 ->runByKey('id_utilisateur');
 
@@ -188,17 +192,17 @@ class Utilisateur extends Controller
     }
 
     /** retourne le json a l'ajax d'édition */
-    public function ajax_edit()
+    public function ajax_edit(): bool|string
     {
         return $this->getTableau()->setFonctionData(function($arrayForJson){
 
-            $validation = (new \App\classe\Validation($_POST))
+            $validation = (new Validation($_POST))
                 ->addFieldsFromArray($this->getFormulaire())
                 ->runByKey('id_utilisateur');
 
             $utilisateur = \App\model\Utilisateur::getByID($validation->get('id_utilisateur'));
 
-            $forms = (new \App\classe\Forms())
+            $forms = (new Forms())
                 ->setMethod('POST')
                 ->setUrl('/utilisateur/save-edit') // default current url
                 ->setSize('600px')
@@ -213,11 +217,11 @@ class Utilisateur extends Controller
     }
 
     /** retourne le json a l'ajax de creation */
-    public function ajax_add()
+    public function ajax_add(): bool|string
     {
         return $this->getTableau()->setFonctionData(function($arrayForJson){
 
-            $forms = (new \App\classe\Forms())
+            $forms = (new Forms())
                 ->setMethod('POST')
                 ->setUrl('/utilisateur/save-add') // default current url
                 ->setSize('600px')
@@ -231,11 +235,11 @@ class Utilisateur extends Controller
         }, false);
     }
 
-    public function ajax_save_edit()
+    public function ajax_save_edit(): bool|string
     {
         return $this->getTableau()->setFonctionData(function($arrayForJson){
 
-            $validation = (new \App\classe\Validation($_POST))
+            $validation = (new Validation($_POST))
                 ->addFieldsFromArray($this->getFormulaire())
                 ->run();
 
@@ -255,11 +259,11 @@ class Utilisateur extends Controller
         }, false);
     }
 
-    public function ajax_save_add()
+    public function ajax_save_add(): bool|string
     {
         return $this->getTableau()->setFonctionData(function($arrayForJson){
 
-            $validation = (new \App\classe\Validation($_POST))
+            $validation = (new Validation($_POST))
                 ->addFieldsFromArray($this->getFormulaire())
                 ->run();
 

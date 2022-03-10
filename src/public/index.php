@@ -42,7 +42,7 @@ try{
     /**
      * En cas de crash avant la mise en place des middlewares ont arrive ici
      * Dans se cas on essai plusieurs solution pour envoyer l'erreur
-     * En prod il est l'on tombe sur une erreur 500 non custom, pas d'autre choix
+     * En prod l'on tombe sur une erreur 500 non custom, pas d'autre choix
      * @todo creer une page 500 en static pour la prod
      */
     \App\classe\ErrorCatch::showError($e);

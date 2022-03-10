@@ -5,6 +5,7 @@
 
 $app_name = 'Timek';
 $root_dir = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR;
+$public_dir = realpath($root_dir.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR);
 
 return array(
 
@@ -19,8 +20,8 @@ return array(
     // Migration
     "Migration"   => [
         /** migration de l'app principal */
-        'App' => ['path' => realpath($root_dir.'/src/migration/'), 'name' => 'App']
-        ,'Trad' => ['path' => realpath($root_dir.'/src/trad/'), 'name' => 'Trad']
+        'App' => ['path' => realpath($root_dir.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'migration'.DIRECTORY_SEPARATOR), 'name' => 'App']
+        ,'Trad' => ['path' => realpath($root_dir.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'trad'.DIRECTORY_SEPARATOR), 'name' => 'Trad']
     ],
 
     "login_page" => '/login',
@@ -30,7 +31,10 @@ return array(
 
     // ARBORESCENCE
     "ROOT_DIR"   => realpath($root_dir),
-    "PUBLIC_DIR"   => realpath($root_dir.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR),
+    "PUBLIC_DIR"   => $public_dir,
+    "CSS_folder" => realpath($public_dir.DIRECTORY_SEPARATOR.'asset'.DIRECTORY_SEPARATOR.'css'),
+    "VIEW_folder" => realpath($root_dir.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'view'),
+    "JS_folder" => realpath($public_dir.DIRECTORY_SEPARATOR.'asset'.DIRECTORY_SEPARATOR.'js'),
 
     // BDD
     "db_user" => 'timetracker',
