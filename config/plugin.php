@@ -7,10 +7,18 @@
 
 return [
 
-    /** @todo add jquery,  */
+    /**
+     *
+     * @todo tout ce qui a un numero de version doit utiliser un middleware de cache centralisé
+     * @todo ou le router ????
+     */
+
     /** @todo add fontawesome,  */
-    /** @todo dissocier popin */
-    /** @todo ne plus avoir besoin de l'include du template de la popin dans le head */
+    /** @todo add css button commun a form et a popin    --- button require fontawesom */
+
+    /** @todo add css button --- button require fontawesom */
+
+    /** @todo dissocier js error handler */
 
     /** @todo plugin ajout support TRADUCTION */
     /** @todo plugin ajout support MIGRATION */

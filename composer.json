@@ -16,8 +16,8 @@
         "veka-server/http-server-built-in-php": "^0.1.2",
         "veka-server/discord": "^0.2.0",
         "veka-server/lang": "^0.1.1",
-        "veka-server/form": "^0.0.10",
-        "nyholm/psr7-server": "^1.0"
+        "nyholm/psr7-server": "^1.0",
+        "veka-server/form": "^0.0.26"
     },
     "require-dev": {
         "php-middleware/php-debug-bar": "^4.0"
