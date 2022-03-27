@@ -14,7 +14,7 @@ class Login extends Controller
         }
 
         $params = [
-            'surcharge_template' => 'common/template_login.twig'
+            'surcharge_template' => 'login/template_login.twig'
         ];
 
         return $this->show($params);

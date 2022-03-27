@@ -13,7 +13,6 @@ return [
      * @todo ou le router ????
      */
 
-    /** @todo add fontawesome,  */
     /** @todo add css button commun a form et a popin    --- button require fontawesom */
 
     /** @todo add css button --- button require fontawesom */
