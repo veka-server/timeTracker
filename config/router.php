@@ -33,7 +33,7 @@ return (new \VekaServer\Rooter\Rooter())
     })
 
     // Gestion des contraintes JS en AJAX sur les formulaires
-    ->post('/js_check_input',function(){ echo (new \VekaServer\TableForm\Contrainte())->ajax();})
+    ->post('/js_check_input',function(){ echo (new \App\classe\Contrainte())->ajax();})
 
     // add route for font awesome
     ->get('/fontawesome/(.+)',function($filename){\VekaServer\FontAwesome\Autoload::getFontByName($filename);})

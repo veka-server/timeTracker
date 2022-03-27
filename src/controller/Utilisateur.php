@@ -1,8 +1,8 @@
 <?php
 namespace App\controller;
 
+use App\classe\Contrainte;
 use VekaServer\Framework\Lang;
-use VekaServer\TableForm\Contrainte;
 use VekaServer\TableForm\Forms;
 use VekaServer\TableForm\Input;
 use VekaServer\TableForm\Tableau;
