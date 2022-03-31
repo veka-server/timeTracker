@@ -26,8 +26,8 @@ $tableau_middleware[] = new VekaServer\RedirectErrorPage\RedirectErrorPage('/500
 
 /** Minifier CSS ET JS vers les url /css et /js */
 $tableau_middleware[] = new \VekaServer\Minifier\Minifier(
-    $config->get('PUBLIC_DIR').'/asset/css/'
-    , $config->get('PUBLIC_DIR').'/asset/js/'
+    \VekaServer\Framework\Plugin::getInstance()->getAllCSSFolders()
+    , \VekaServer\Framework\Plugin::getInstance()->getAllJSFolders()
     ,86400
 );
 

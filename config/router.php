@@ -35,6 +35,9 @@ return (new \VekaServer\Rooter\Rooter())
     // Gestion des contraintes JS en AJAX sur les formulaires
     ->post('/js_check_input',function(){ echo (new \App\classe\Contrainte())->ajax();})
 
+    // add route for font awesome
+    ->get('/fontawesome/(.+)',function($filename){\VekaServer\FontAwesome\Autoload::getFontByName($filename);})
+
     // page de gestion des erreurs Javascript
     ->post('/error_js_caught',function(){(new \App\controller\JsErrorHandler())->catchJsError();})
 

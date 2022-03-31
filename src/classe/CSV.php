@@ -49,7 +49,7 @@ class CSV
         /** retourner les données csv complète */
         $final_data = $string_header.implode(PHP_EOL, array_map(function($row){
                 return '"'.implode('"'.$this->getDelimiter().'"', array_map(function($cell){ /** ajout du separateur */
-                        return str_replace('"', '""', $cell); /** doubler les guillemet */
+                        return str_replace('"', '""', $cell.''); /** doubler les guillemet */
                     }, $row)).'"';
             }, $data)).PHP_EOL;
 

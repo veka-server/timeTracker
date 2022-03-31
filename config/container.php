@@ -20,7 +20,7 @@ return [
      * Moteur de template qui doit étendre VekaServer\Interfaces
      */
     "Renderer" => new \VekaServer\TwigRenderer\TwigRenderer(
-        $config->get('ROOT_DIR').'/src/view/',
+        \VekaServer\Framework\Plugin::getInstance()->getAllViewFolders(),
         false /* $config->get('ROOT_DIR').'\../cache/' */
         ,[\VekaServer\Framework\Lang::class, 'get'] /* methode du framework appelé pour les traductions */
     )
