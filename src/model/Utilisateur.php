@@ -1,12 +1,22 @@
 <?php
 namespace App\model;
 
+use VekaServer\Framework\Log;
+
 class Utilisateur extends Model
 {
 
     public static function getAll(){
-        $sql = 'SELECT * FROM utilisateurs';
-        return self::exec($sql);
+        $sql = 'SELECT id_utilisateur,
+                    nom,
+                    prenom,
+                    telephone,
+                    email,
+                    date_creation,
+                    disable,
+                    lang,
+                    timezone FROM utilisateurs';
+        return self::exec_pagination($sql);
     }
 
     public static function getByEmail($email){
@@ -25,6 +35,11 @@ class Utilisateur extends Model
         $list_fields_params=[];
         $list_values=[];
         foreach ($values as $key => $value){
+
+            if($key == 'id_utilisateur'){
+                continue;
+            }
+
             $list_fields[] = $key;
             $list_fields_params[] = ':'.$key;
             $list_values['s-'.$key] = $value;
@@ -53,4 +68,9 @@ class Utilisateur extends Model
         self::exec($sql, $list_values);
     }
 
+    public static function isEmailAlreadyExist($email, $id_utilisateur){
+        $sql = 'SELECT * FROM utilisateurs WHERE email = :email AND id_utilisateur != :id_utilisateur';
+        $rs = self::exec($sql, ['id_utilisateur' => $id_utilisateur, 'email' => $email]);
+        return empty($rs) === false;
+    }
 }

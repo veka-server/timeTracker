@@ -3,7 +3,7 @@ namespace App\model;
 
 use VekaServer\Container\Container;
 
-class Model extends \VekaServer\Framework\Model
+class Model extends \VekaServer\TableForm\Model
 {
     public static function exec(string $sql, array $data = array()){
         $debugbar = Container::getInstance()->get('DebugBar');

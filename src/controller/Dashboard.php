@@ -6,14 +6,19 @@ use App\model\Utilisateur;
 class Dashboard extends Controller
 {
 
+    /** @var string $menu menu gauche actif */
+    protected static $menu = 'dashboard';
+
     /**
      * @throws \Exception
      */
     public function show_page(): string
     {
+/*
         $rs = Utilisateur::getByID($_SESSION['utilisateur']['id_utilisateur']);
         $msg = PHP_EOL.'<br/> connecté : '.$rs[0]['nom'];
-
+*/
+        $msg = 'eeee';
         $params = [
             'content' => $msg
             ,'titre' => 'titre de la page en cours'

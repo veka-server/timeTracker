@@ -1,12 +1,15 @@
 <html>
 <head>
-    {{ include('common/head.twig') }}
+    {{ include('common/template/head.twig') }}
 </head>
 <body>
-{{ include('common/menu_et_header.twig') }}
+{{ include('common/template/menu_et_header.twig') }}
 <div id="content-wrapper">
     <div class="mui--appbar-height"></div>
     <div class="mui-container-fluid">
+
+        <h1>{{ titre|upper }}</h1>
+
         {{ content | raw }}
     </div>
 </div>

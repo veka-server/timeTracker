@@ -1,0 +1,17 @@
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{app_name}}</title>
+    <link rel="shortcut icon" type="image/png" href="/asset/img/icon.png?version={{version}}">
+    <link href="/css?version={{version}}" rel="stylesheet" type="text/css" >
+    <script src="/js?version={{version}}"></script>
+    <script>
+        Popin.btn_valider = {{ "valider" | lang  | json_encode | raw }};
+        Popin.btn_annuler = {{ "annuler" | lang  | json_encode | raw }};
+
+        let Trad = {};
+        Trad.generic_error = {{ "erreur_generic" | lang | json_encode | raw }};
+        Trad.generic_confirm_title_popin = {{ "generic_confirm_title_popin" | lang | json_encode | raw }};
+        Trad.generic_success_title_popin = {{ "generic_success_title_popin" | lang | json_encode | raw }};
+        Trad.generic_success_msg = {{ "generic_success_msg" | lang | json_encode | raw }};
+    </script>

@@ -55,6 +55,13 @@ class Utilisateur
         die();
     }
 
+    public static function randomPassword():string
+    {
+        $length = 8;
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        return substr(str_shuffle($chars),0,$length);
+    }
+
     /** retourne l'attribut du client a partir des données en cache */
     public function getAttribute(string $key)
     {

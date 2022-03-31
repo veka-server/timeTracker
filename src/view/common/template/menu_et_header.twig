@@ -1,0 +1,107 @@
+<div id="sidedrawer" class="mui--no-user-select">
+    <div id="sidedrawer-brand" class="mui--appbar-line-height">
+        <span class="mui--text-title">
+
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+     width="128.000000pt" height="128.000000pt" viewBox="0 0 128.000000 128.000000"
+     preserveAspectRatio="xMidYMid meet" class="icon_site">
+
+    <g fill="#0597FF" transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" stroke="none" >
+        <path d="M480 1240 l0 -40 160 0 160 0 0 40 0 40 -160 0 -160 0 0 -40z"/>
+        <path d="M1067 1132 l-27 -28 53 -52 53 -52 27 28 27 28 -53 52 -53 52 -27 -28z"/>
+        <path d="M555 1110 c-214 -34 -396 -199 -456 -410 -17 -64 -16 -224 4 -286 26
+        -86 68 -161 124 -223 66 -74 137 -121 233 -156 63 -23 92 -27 175 -28 166 -1
+        278 46 395 163 77 77 117 142 147 244 21 67 21 225 0 292 -55 181 -188 323
+        -356 379 -76 26 -193 37 -266 25z m256 -99 c121 -46 232 -156 280 -279 33 -83
+        33 -261 0 -344 -47 -121 -160 -233 -279 -279 -79 -30 -208 -36 -291 -15 -167
+        43 -303 177 -346 341 -19 75 -19 175 0 250 42 161 174 294 336 340 76 21 226
+        14 300 -14z"/>
+        <path  fill="#5c76f8" d="M640 761 l0 -201 201 0 200 0 -7 48 c-26 183 -162 319 -346 346 l-48 7 0 -200z"/>
+    </g>
+</svg>
+
+        <span style="color:#0597FF; font-weight:bold;">{{ app_name }}</span></span>
+        <span style="font-size: 0.7em; color:rgba(255,255,255,0.7); font-weight:bold; letter-spacing: 0.3em; text-transform: uppercase;">{{version}}</span>
+    </div>
+
+    <div class="categorie_menu">{{ "menu.navigation" | lang }}</div>
+    <ul>
+        <li>
+            <a href="/">
+                <strong {% if active_menu == "dashboard" %}class="active"{% endif %}><i class="fas fa-home"></i>
+                    {{ "menu.dashboard" | lang }}</strong>
+            </a>
+        </li>
+        <li>
+            <a href="/">
+                <strong {% if active_menu == "temps" %}class="active"{% endif %}><i class="fas fa-hourglass-half"></i>
+                    {{ "menu.temps" | lang }}</strong>
+            </a>
+        </li>
+    </ul>
+
+    <div class="categorie_menu">{{ "menu.administration" | lang }}</div>
+    <ul>
+        <li>
+            <a href="/utilisateur">
+                <strong {% if active_menu == "utilisateur" %}class="active"{% endif %}><i class="fas fa-euro-sign"></i>
+                    {{ "menu.utilisateurs" | lang }}</strong>
+            </a>
+        </li>
+<!--
+        <li>
+            <strong><i class="fas fa-cogs"></i> Administration</strong>
+            <ul>
+                <li><a href="#" >Clients</a></li>
+                <li><a href="#">Projets</a></li>
+                <li><a href="#">Utilisateurs</a></li>
+                <li><a href="#">Rôles</a></li>
+                <li><a href="#">Paramètres</a></li>
+                <li><a href="#">État des ervices</a></li>
+            </ul>
+        </li>
+-->
+    </ul>
+
+</div>
+<header id="header">
+    <div class="mui-appbar mui--appbar-line-height">
+        <div class="mui-container-fluid">
+            <a class="sidedrawer-toggle mui--visible-xs-inline-block mui--visible-sm-inline-block js-show-sidedrawer">☰</a>
+            <a class="sidedrawer-toggle mui--hidden-xs mui--hidden-sm js-hide-sidedrawer">☰</a>
+            <span class="mui--text-title mui--visible-xs-inline-block mui--visible-sm-inline-block"><i class="icon_site"></i> {{ app_name }}</span>
+            <span class="titre-bar-principal">{{ titre|upper }}</span>
+
+            <ul class="menu-top">
+                <li>
+
+                    <div class="bubble_lang">
+                        <span class="icon_lang"></span>
+                    </div>
+
+                </li>
+                <li>
+
+
+                    <div class="bubble_user">
+                        <span class="icon_user"></span>
+                        <i class="fas fa-chevron-down"></i>
+
+                        <div id="menu_account">
+
+                            <ul>
+                                <li>Mon profil</li>
+                                <li>Paramètre</li>
+                                <li><a href="/logout">Déconnexion</a></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</header>

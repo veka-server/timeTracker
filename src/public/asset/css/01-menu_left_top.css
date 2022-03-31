@@ -1,0 +1,61 @@
+#header{position:fixed;top:0;right:0;left:0;z-index:2;transition:left .2s}
+#sidedrawer{position:fixed;top:0;bottom:0;width:200px;left:-200px;overflow:auto;z-index:2;background-color:#26243c;color:rgba(255,255,255,0.7);transition:transform .2s}
+#content-wrapper{min-height:100%;overflow-x:hidden;margin-left:0;transition:margin-left .2s;box-sizing:border-box;margin-bottom:-60px;padding-bottom:60px}
+.icon_site{width:35px;height:35px;display:inline-block;vertical-align:middle}
+.titre-bar-principal {margin-left:20px;}
+.mui-appbar {background: white;border-bottom:2px solid rgba(0,0,0,0.1);}
+
+@media (min-width: 768px) {
+    #header{left:200px}
+    #sidedrawer{transform:translate(200px)}
+    #content-wrapper{margin-left:200px}
+    body.hide-sidedrawer #header{left:0}
+    body.hide-sidedrawer #sidedrawer{transform:translate(0px)}
+    body.hide-sidedrawer #content-wrapper{margin-left:0}
+}
+
+#sidedrawer.active{transform:translate(200px)}
+.sidedrawer-toggle{color:#0B2559;cursor:pointer;font-size:20px;line-height:20px;margin-right:10px}
+.sidedrawer-toggle:hover{color:rgba(255,255,255,0.2);}
+#sidedrawer-brand{padding-left:20px}
+#sidedrawer ul{list-style:none}
+#sidedrawer > ul{padding-left:0}
+#sidedrawer > ul > li:first-child{padding-top:7px}
+#sidedrawer strong{display:block;padding:9px 22px;cursor:pointer; font-weight: bold; font-size: 14px; line-height: 22px; letter-spacing: 0.05em; color:rgba(255,255,255,0.6);text-transform: capitalize;}
+#sidedrawer strong i {width:18px;color:rgba(255,255,255,0.35);font-size:1.2em; }
+#sidedrawer strong.active{ color: #3d3393;position: relative; }
+#sidedrawer strong.active:before{content:''; display:block; width: 190px; height: 100%; position: absolute;top:0;left: 0;z-index: -1;
+    border-radius: 0 150px 150px 0  ;
+    -moz-border-radius: 0 150px 150px 0 ;
+    -webkit-border-radius: 0 150px 150px 0 ;
+    background:#EEEEEE;
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    margin-left:10px;
+
+}
+#sidedrawer strong.active i {color:#5446cf;z-index: 10; }
+#sidedrawer strong:not(.active):hover{background-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.8);}
+#sidedrawer strong:not(.active):hover i {color:rgba(255,255,255,0.8);}
+#sidedrawer strong + ul > li{padding:6px 0}
+#sidedrawer > ul i {padding-right:10px}
+
+.categorie_menu{text-transform:uppercase;font-weight:700;font-size:.8em;letter-spacing:.12em;margin-left:22px;color:rgba(255,255,255,0.35);margin-top:8px}
+ul + .categorie_menu{margin-top:35px}
+
+.menu-top{display:inline-block;color:#000;float:right;margin:0}
+.menu-top li{display:inline-block;margin-left:15px;vertical-align:middle}
+.bubble_user,.bubble_lang{position:relative;display:inline-block;padding:0;cursor:pointer}
+.bubble_user .icon_user,.bubble_lang .icon_lang{display:inline-block;width:35px;height:35px;background:url(https://avatars.githubusercontent.com/u/3823643?v=4) no-repeat;background-size:35px;border-radius:50px;border:1px solid rgba(0,0,0,0.3);z-index:1;vertical-align:middle;opacity:.9}
+.bubble_user:hover .icon_user,.bubble_lang:hover .icon_lang{opacity:1}
+.bubble_lang .icon_lang{display:inline-block;width:25px;height:25px;background:url(https://www.ffass.fr/wp-content/uploads/2018/01/drapeau-france.jpg) no-repeat;background-size:100% 100%;border-radius:50px;z-index:1;vertical-align:middle}
+.bubble_user i{font-size:1.2em;vertical-align:middle;color:rgba(0,0,0,0.5)}
+.bubble_user:hover i{color:rgba(0,0,0,0.7)}
+#menu_account{position:absolute;top:50px;right:0;background:#fff;border-radius:5px;padding:7px;box-shadow:0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);display:none}
+.bubble_user:hover #menu_account{display:block}
+#menu_account ul{padding:0;margin:0}
+#menu_account ul li{display:block;margin:0;line-height:2em;padding:5px}
+#menu_account ul li:hover{background:rgba(0,0,0,0.1)}
