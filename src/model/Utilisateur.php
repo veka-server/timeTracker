@@ -1,8 +1,6 @@
 <?php
 namespace App\model;
 
-use VekaServer\Framework\Log;
-
 class Utilisateur extends Model
 {
 
